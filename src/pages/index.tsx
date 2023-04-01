@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
-import { api } from "~/utils/api";
+import { api } from "src/utils/api";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -20,8 +20,6 @@ export default function Home() {
 
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
-
-  console.log(sessionData);
 
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
     undefined, // no input
