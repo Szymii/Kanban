@@ -1,8 +1,8 @@
 import { type GetServerSidePropsContext } from "next";
 import {
-  getServerSession,
-  type NextAuthOptions,
   type DefaultSession,
+  type NextAuthOptions,
+  getServerSession,
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
