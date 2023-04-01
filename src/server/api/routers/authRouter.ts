@@ -1,20 +1,18 @@
-import { z } from "zod";
-
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { hash } from "argon2";
 import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const authRouter = createTRPCRouter({
   signUp: publicProcedure
     .input(
       z.object({
-        username: z.string(),
+        name: z.string(),
         email: z.string().email(),
         password: z.string().min(4).max(12),
-      })
+      }),
     )
     .query(async ({ input, ctx }) => {
-      const { username, email, password } = input;
+      const { name, email, password } = input;
 
       const exists = await ctx.prisma.user.findFirst({
         where: { email },
@@ -27,10 +25,8 @@ export const authRouter = createTRPCRouter({
         });
       }
 
-      const hashedPassword = await hash(password);
-
       const result = await ctx.prisma.user.create({
-        data: { username, email, password: hashedPassword },
+        data: { name, email, password: password },
       });
 
       return {
