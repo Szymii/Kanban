@@ -6,8 +6,11 @@ const config = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["winter", "night"],
-    darkTheme: "night",
+    themes: [
+      "winter",
+      //  "night"
+    ],
+    darkTheme: "winter",
   },
 };
 
