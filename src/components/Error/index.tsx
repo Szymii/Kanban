@@ -11,7 +11,7 @@ export const Error = ({ size = 512, text, action }: IProps) => {
     <div className="flex flex-col items-center">
       <Image
         priority
-        src="Bug.svg"
+        src="/Bug.svg"
         height={size}
         width={size}
         alt="Follow us on Twitter"
@@ -19,7 +19,7 @@ export const Error = ({ size = 512, text, action }: IProps) => {
       <h2 className="text-2xl">{text}</h2>
       {action && (
         <button className="btn-primary btn mt-4" onClick={action}>
-          Button
+          Bo back
         </button>
       )}
     </div>
