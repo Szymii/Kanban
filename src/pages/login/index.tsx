@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import { LinkButton } from "src/components/LinkButton";
 import { LoginForm } from "src/modules/profile";
 
 export default function Login() {
@@ -12,7 +13,7 @@ export default function Login() {
       </Head>
 
       <div className="flex h-screen items-center justify-center ">
-        <div className="container mx-auto flex flex-col items-center justify-center gap-8 px-8 md:flex-row">
+        <div className="container mx-auto flex flex-col items-center justify-center gap-16 px-8 lg:flex-row">
           <Image
             priority
             src="/Home.svg"
@@ -20,7 +21,14 @@ export default function Login() {
             width={480}
             alt="Login"
           />
-          <LoginForm />
+          <div className="w-full">
+            <LoginForm />
+            <div className="mt-3">
+              <LinkButton direction="/register">
+                {"Don't have an account yet? Register here."}
+              </LinkButton>
+            </div>
+          </div>
         </div>
       </div>
     </>
