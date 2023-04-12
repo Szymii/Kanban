@@ -15,10 +15,13 @@ export const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className="" onSubmit={methods.handleSubmit(onSubmit)}>
+      <form
+        className="w-full max-w-md"
+        onSubmit={methods.handleSubmit(onSubmit)}
+      >
         <TextField label="Email" name="email" type="email" required />
         <TextField label="Password" name="password" type="password" required />
-        <button className="btn-primary btn-active btn mt-4 w-full max-w-xs">
+        <button className="btn-primary btn-active btn mt-4 w-full">
           Sign in
         </button>
       </form>

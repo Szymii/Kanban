@@ -14,7 +14,7 @@ export const Error = ({ size = 512, text, action }: IProps) => {
         src="/Bug.svg"
         height={size}
         width={size}
-        alt="Follow us on Twitter"
+        alt="An error ocurred"
       />
       <h2 className="text-2xl">{text}</h2>
       {action && (

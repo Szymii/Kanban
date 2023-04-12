@@ -25,7 +25,7 @@ export const TextField = ({
   } = useFormContext();
 
   return (
-    <div className="form-control w-full max-w-xs">
+    <div className="form-control w-full">
       <label className="label" htmlFor={id}>
         <span className="label-text">
           {label}
@@ -37,7 +37,7 @@ export const TextField = ({
         {...register(name, { required })}
         id={id}
         placeholder={placeholder}
-        className={`input-bordered input w-full max-w-xs ${
+        className={`input-bordered input w-full ${
           errors[name] ? "input-error" : ""
         }`}
         disabled={disabled}
