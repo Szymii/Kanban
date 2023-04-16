@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { LinkButton } from "src/components/LinkButton";
 import { PublicLayout } from "src/containers/PublicLayout";
-import { LoginForm } from "src/modules/profile";
-import { PublicMeta } from "src/modules/publicModules";
+import { LoginForm, PublicMeta } from "src/modules/publicModules";
 
 export default function Login() {
   return (
