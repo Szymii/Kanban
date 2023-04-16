@@ -9,7 +9,8 @@ async function main() {
     update: {},
     create: {
       email: "test@example.com",
-      name: "Tester",
+      firstName: "Tester",
+      lastName: "Tester",
       password: "", //
       emailVerified: null,
       image: null,
@@ -21,7 +22,8 @@ async function main() {
     update: {},
     create: {
       email: "admin@example.com",
-      name: "Admin",
+      firstName: "Admin",
+      lastName: "Admin",
       password: "", //
       emailVerified: null,
       image: null,

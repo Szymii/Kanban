@@ -34,15 +34,15 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   debug: true,
-  // callbacks: {
-  //   session({ session, user }) {
-  //     if (session.user) {
-  //       session.user.id = user.id;
-  //       // session.user.role = user.role; <-- put other properties on the session here
-  //     }
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+
+      return session;
+    },
+  },
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -56,7 +56,11 @@ export const authOptions: NextAuthOptions = {
       },
       authorize: (credentials) => {
         // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
+        const user = {
+          id: "asd1",
+          name: "J Smith",
+          email: "jsmith@example.com",
+        };
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
@@ -72,10 +76,10 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
-  // pages: {
-  //   signIn: "/",
-  //   newUser: "/sign-up",
-  // },
+  pages: {
+    signIn: "/login",
+    newUser: "/register",
+  },
 };
 
 /**

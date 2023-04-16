@@ -1,7 +1,29 @@
+import { type GetServerSideProps } from "next";
+import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import { LinkButton } from "src/components/LinkButton";
 import { PublicLayout } from "src/containers/PublicLayout";
 import { LoginForm, PublicMeta } from "src/modules/publicModules";
+import { authOptions } from "src/server/auth";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/profile",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};
 
 export default function Login() {
   return (

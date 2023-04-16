@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { TextField } from "src/components/FormFields";
 
@@ -9,8 +10,11 @@ interface ILoginData {
 export const LoginForm = () => {
   const methods = useForm<ILoginData>();
 
-  const onSubmit = (data: ILoginData) => {
-    //
+  const onSubmit = async (data: ILoginData) => {
+    await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (
