@@ -19,7 +19,7 @@ export const Error = ({ size = 512, text, action }: IProps) => {
       <h2 className="text-2xl">{text}</h2>
       {action && (
         <button className="btn-primary btn mt-4" onClick={action}>
-          Bo back
+          Go back
         </button>
       )}
     </div>
