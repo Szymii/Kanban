@@ -11,7 +11,7 @@ export const Error = ({ size = 512, text, action }: IProps) => {
     <div className="flex flex-col items-center">
       <Image
         priority
-        src="/Bug.svg"
+        src="/images/Bug.svg"
         height={size}
         width={size}
         alt="An error ocurred"

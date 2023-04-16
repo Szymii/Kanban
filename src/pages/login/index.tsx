@@ -12,7 +12,7 @@ export default function Login() {
           <div className="container mx-auto flex flex-col items-center justify-center gap-16 px-8 lg:flex-row">
             <Image
               priority
-              src="/Home.svg"
+              src="/images/Home.svg"
               height={480}
               width={480}
               alt="Login"
