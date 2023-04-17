@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { type GetServerSidePropsContext } from "next";
 import {
   type DefaultSession,
@@ -5,6 +6,8 @@ import {
   getServerSession,
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+import { prisma } from "./db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -54,15 +57,29 @@ export const authOptions: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      authorize: (credentials) => {
+      async authorize(credentials) {
         // Add logic here to look up the user from the credentials supplied
-        const user = {
-          id: "asd1",
-          name: "J Smith",
-          email: "jsmith@example.com",
-        };
 
-        if (user) {
+        if (!credentials?.password || !credentials?.email) {
+          return null;
+        }
+
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials.email,
+          },
+        });
+
+        if (!user) {
+          return null;
+        }
+
+        const isValidPassword = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
+
+        if (isValidPassword) {
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {
