@@ -5,7 +5,7 @@ import { Avatar } from "src/components/Avatar";
 interface IProps {
   name: string;
   surname: string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
   logoutFunction: () => void;
 }
 

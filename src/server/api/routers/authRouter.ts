@@ -18,8 +18,8 @@ export const authRouter = createTRPCRouter({
       });
 
       return {
-        status: 201,
-        message: "Account created successfully",
+        status: 200,
+        message: "Authenticated",
         result: user,
       };
     }),

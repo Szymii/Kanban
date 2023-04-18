@@ -5,7 +5,7 @@ import { UserProfileCard } from "./UserProfileCard";
 interface IProps {
   name: string;
   surname: string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
   logoutFunction: () => void;
 }
 

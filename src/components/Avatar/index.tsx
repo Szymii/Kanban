@@ -3,7 +3,7 @@ import React from "react";
 
 interface IProps {
   size?: "sm" | "md" | "lg" | "xl";
-  avatarUrl?: string;
+  avatarUrl?: string | null;
   name: string;
   surname: string;
 }
