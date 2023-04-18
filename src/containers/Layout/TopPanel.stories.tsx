@@ -13,6 +13,8 @@ export const Default: Story = {
   args: {
     name: "John",
     surname: "Doe",
-    profileUrl: "/",
+    logoutFunction: () => {
+      return;
+    },
   },
 };

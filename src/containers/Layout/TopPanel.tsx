@@ -6,7 +6,7 @@ interface IProps {
   name: string;
   surname: string;
   avatarUrl?: string;
-  profileUrl: string;
+  logoutFunction: () => void;
 }
 
 export const TopPanel = (props: IProps) => {
