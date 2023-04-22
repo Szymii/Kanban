@@ -1,3 +1,5 @@
+import { Layout } from "src/containers/Layout";
+
 export default function Backlog() {
-  return <div>backlog</div>;
+  return <Layout>backlog</Layout>;
 }

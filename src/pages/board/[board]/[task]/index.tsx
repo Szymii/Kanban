@@ -1,3 +1,5 @@
+import { Layout } from "src/containers/Layout";
+
 export default function Task() {
-  return <div>task</div>;
+  return <Layout>task</Layout>;
 }

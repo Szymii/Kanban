@@ -1,13 +1,20 @@
-import { useSession } from "next-auth/react";
 import { Layout } from "src/containers/Layout";
+import {
+  BoardSelectionSection,
+  ProfileMeta,
+  UserSection,
+} from "src/modules/profile";
 
 export default function Profile() {
-  const { data: sessionData } = useSession();
-
   return (
     <>
+      <ProfileMeta />
       <Layout>
-        <>Profile</>
+        <div>
+          <UserSection />
+          <hr className="my-12" />
+          <BoardSelectionSection />
+        </div>
       </Layout>
     </>
   );

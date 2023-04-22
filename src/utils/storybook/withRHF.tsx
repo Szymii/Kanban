@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 export const withRHF = () => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
+  // @ts-ignore
   // eslint-disable-next-line react/display-name
   return (Story) => (
     <WithRHF>

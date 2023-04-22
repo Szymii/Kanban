@@ -1,3 +1,5 @@
+import { Layout } from "src/containers/Layout";
+
 export default function Board() {
-  return <div>Board</div>;
+  return <Layout>Board</Layout>;
 }

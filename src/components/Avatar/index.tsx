@@ -19,6 +19,13 @@ export const Avatar = ({ avatarUrl, name, surname, size = "md" }: IProps) => {
     xl: "w-48",
   };
 
+  const fontSize = {
+    sm: "text-base",
+    md: "text-lg",
+    lg: "text-3xl",
+    xl: "text-7xl",
+  };
+
   if (avatarUrl)
     return (
       <div className="avatar">
@@ -38,7 +45,7 @@ export const Avatar = ({ avatarUrl, name, surname, size = "md" }: IProps) => {
       <div
         className={`${avatarSize[size]} rounded-full bg-neutral-focus text-neutral-content`}
       >
-        <span>{initials}</span>
+        <span className={`${fontSize[size]}`}>{initials}</span>
       </div>
     </div>
   );

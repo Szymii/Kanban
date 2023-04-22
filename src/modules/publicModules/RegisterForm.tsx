@@ -1,10 +1,12 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { TextField } from "src/components/FormFields";
-import { CheckBox } from "src/components/FormFields/CheckBox";
 
 interface IRegisterData {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
+  confirm: string;
 }
 
 export const RegisterForm = () => {
