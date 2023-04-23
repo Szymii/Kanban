@@ -12,8 +12,8 @@ export default function Profile() {
       <Layout>
         <div>
           <UserSection />
-          <hr className="my-12" />
-          <BoardSelectionSection />
+          <hr className="mt-16 mb-12" />
+          <BoardSelectionSection boards={[{ slug: "PZP" }]} />
         </div>
       </Layout>
     </>

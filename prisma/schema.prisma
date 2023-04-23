@@ -21,4 +21,12 @@ model User {
     email         String    @unique
     emailVerified DateTime?
     image         String?
+    boards        Board[]
+}
+
+model Board {
+    id      String @id @default(cuid())
+    slug    String @unique
+    ownerId String
+    members User[]
 }

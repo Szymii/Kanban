@@ -20,7 +20,7 @@ export const UserSection = () => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-24">
+    <div className="flex flex-col items-center justify-center gap-12 sm:flex-row md:gap-40 lg:gap-72">
       <Avatar
         name={user.firstName}
         surname={user.lastName}
@@ -48,6 +48,9 @@ export const UserSection = () => {
             type="password"
             disabled
           />
+          <button className="btn-primary btn-active btn mt-4 w-full">
+            Edit
+          </button>
         </form>
       </FormProvider>
     </div>

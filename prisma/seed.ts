@@ -5,29 +5,41 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.user.upsert({
-    where: { email: "test@example.com" },
-    update: {},
-    create: {
+  await prisma.user.create({
+    data: {
+      id: "usertestertestid",
       email: "test@example.com",
       firstName: "Tester",
       lastName: "Tester",
       password: await bcrypt.hash("tester", 10),
       emailVerified: null,
       image: null,
+      boards: {
+        create: [
+          {
+            ownerId: "usertestertestid",
+            slug: "TST",
+          },
+        ],
+      },
     },
   });
 
-  await prisma.user.upsert({
-    where: { email: "admin@example.com" },
-    update: {},
-    create: {
+  await prisma.user.create({
+    data: {
+      id: "useradmintestid",
       email: "admin@example.com",
       firstName: "Admin",
       lastName: "Admin",
       password: await bcrypt.hash("admin", 10),
       emailVerified: null,
       image: null,
+      boards: {
+        create: {
+          ownerId: "useradmintestid",
+          slug: "ADM",
+        },
+      },
     },
   });
 }
