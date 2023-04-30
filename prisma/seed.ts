@@ -39,6 +39,9 @@ async function main() {
           ownerId: "useradmintestid",
           slug: "ADM",
         },
+        connect: {
+          slug: "TST",
+        },
       },
     },
   });
