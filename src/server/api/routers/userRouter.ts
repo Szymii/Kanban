@@ -10,4 +10,17 @@ export const userRouter = createTRPCRouter({
 
     return user;
   }),
+
+  withBoards: protectedProcedure.query(({ ctx }) => {
+    const user = ctx.prisma.user.findFirst({
+      where: {
+        id: ctx.session.user.id,
+      },
+      include: {
+        boards: true,
+      },
+    });
+
+    return user;
+  }),
 });
