@@ -1,3 +1,3 @@
 export const BoardSection = () => {
-  return <div>BoardSection</div>;
+  return <div className="mt-8">BoardSection</div>;
 };

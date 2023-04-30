@@ -1,5 +1,6 @@
 import { Layout } from "src/containers/Layout";
 import { BoardSection, HeaderSection } from "src/modules/board";
+import { useUserConsumer } from "src/modules/profile";
 import { useQueryParams } from "src/utils";
 import { api } from "src/utils/api";
 
@@ -8,19 +9,27 @@ interface IProps {
 }
 
 const ConnectedBoard = ({ slug }: IProps) => {
-  const { data } = api.board.getEnhancedBoard.useQuery({
+  const { id: userId } = useUserConsumer();
+  const { data: board } = api.board.getEnhancedBoard.useQuery({
     slug: slug,
   });
 
-  if (!data) {
+  if (!board) {
     return null;
   }
 
-  const { statuses, members, tasks } = data;
+  const { statuses, members, tasks } = board;
 
   return (
     <>
-      <HeaderSection />
+      <HeaderSection
+        isOwner={board.ownerId === userId}
+        users={members.map((member) => ({
+          ...member,
+          name: member.firstName,
+          surname: member.lastName,
+        }))}
+      />
       <BoardSection />
     </>
   );

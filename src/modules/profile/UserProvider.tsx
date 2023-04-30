@@ -2,12 +2,16 @@ import { type ReactNode, createContext, useContext } from "react";
 
 import { type IUserData } from "./IUserData";
 
-interface IProps {
-  children: ReactNode;
-  userData: IUserData;
+interface IUser extends IUserData {
+  id: string;
 }
 
-const UserContext = createContext<IUserData | undefined>(undefined);
+interface IProps {
+  children: ReactNode;
+  userData: IUser;
+}
+
+const UserContext = createContext<IUser | undefined>(undefined);
 
 export const UserProvider = ({ children, userData }: IProps) => {
   return (
@@ -24,15 +28,16 @@ export const useUserConsumer = () => {
   return context;
 };
 
-export const withUser = (user?: Partial<IUserData>) => {
+export const withUser = (user?: Partial<IUser>) => {
   const fixture = {
+    id: "123",
     email: "admin@example.com",
     firstName: "Admin",
     lastName: "admin",
     password: "admin",
     image: null,
     ...user,
-  } as IUserData;
+  } as IUser;
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

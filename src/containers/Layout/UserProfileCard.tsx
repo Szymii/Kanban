@@ -25,7 +25,7 @@ export const UserProfileCard = ({
             <div className="text-sm text-gray-500">View profile</div>
           </div>
         </div>
-        <ul className="w-full bg-base-100 shadow-sm">
+        <ul className="z-10 w-full bg-base-100 shadow-sm">
           <li>
             <Link href={"/profile"}>Profile</Link>
           </li>

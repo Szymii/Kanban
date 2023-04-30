@@ -11,8 +11,6 @@ interface IProps {
 export const AvatarGroup = ({ children }: IProps) => {
   const arrayChildren = Children.toArray(children);
 
-  console.log(arrayChildren.length > 4);
-
   if (arrayChildren.length > 4) {
     return (
       <div className="avatar-group -space-x-4">
