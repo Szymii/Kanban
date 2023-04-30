@@ -19,7 +19,7 @@ async function main() {
           {
             ownerId: "usertestertestid",
             slug: "TST",
-            Status: {
+            statuses: {
               createMany: {
                 data: [
                   {
@@ -53,7 +53,7 @@ async function main() {
         create: {
           ownerId: "useradmintestid",
           slug: "ADM",
-          Status: {
+          statuses: {
             createMany: {
               data: [
                 {

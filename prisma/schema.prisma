@@ -23,16 +23,16 @@ model User {
     emailVerified DateTime?
     image         String?
     boards        Board[]
-    Task          Task[]
+    tasks         Task[]
 }
 
 model Board {
-    id      String   @id @default(cuid())
-    slug    String   @unique
-    ownerId String
-    members User[]
-    Status  Status[]
-    Task    Task[]
+    id       String   @id @default(cuid())
+    slug     String   @unique
+    ownerId  String
+    members  User[]
+    statuses Status[]
+    tasks    Task[]
 }
 
 model Status {
@@ -40,7 +40,7 @@ model Status {
     name    String
     board   Board  @relation(fields: [boardId], references: [id])
     boardId String
-    Task    Task[]
+    tasks   Task[]
 }
 
 model Task {
