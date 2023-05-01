@@ -19,7 +19,7 @@ export default function Profile() {
       <Layout>
         <div>
           <UserSection />
-          <hr className="mt-16 mb-12" />
+          <div className="divider" />
           <BoardSelectionSection boards={user.boards} />
         </div>
       </Layout>

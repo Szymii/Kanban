@@ -30,7 +30,7 @@ const ConnectedBoard = ({ slug }: IProps) => {
           surname: member.lastName,
         }))}
       />
-      <BoardSection />
+      <BoardSection statuses={statuses} tasks={tasks} />
     </>
   );
 };

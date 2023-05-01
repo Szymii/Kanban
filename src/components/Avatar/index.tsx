@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 interface IProps {
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   avatarUrl?: string | null;
   name: string;
   surname: string;
@@ -13,6 +13,7 @@ export const Avatar = ({ avatarUrl, name, surname, size = "md" }: IProps) => {
   const initials = `${name[0]!} ${surname[0]!}`;
 
   const avatarSize = {
+    xs: "w-8",
     sm: "w-10",
     md: "w-12",
     lg: "w-20",
@@ -20,6 +21,7 @@ export const Avatar = ({ avatarUrl, name, surname, size = "md" }: IProps) => {
   };
 
   const fontSize = {
+    xs: "text-sm",
     sm: "text-base",
     md: "text-lg",
     lg: "text-3xl",
