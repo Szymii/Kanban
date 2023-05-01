@@ -52,7 +52,8 @@ model Task {
     member      User?   @relation(fields: [userId], references: [id])
     userId      String?
     type        Type
-    description String
+    title       String
+    description String?
     number      Int     @unique @default(autoincrement())
 
     updatedAt DateTime @default(now())

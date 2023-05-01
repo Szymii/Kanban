@@ -10,7 +10,7 @@ export const Column = ({ children, name, action }: IProps) => {
   const childrenCount = Children.count(children);
 
   return (
-    <div className="flex flex-col rounded-md bg-slate-200 p-2">
+    <div className="flex min-w-[300px] flex-1 flex-col rounded-md bg-slate-200 p-2">
       <div className="flex justify-between">
         <h2 className="p-2 font-bold">
           {name} {childrenCount}

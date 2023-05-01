@@ -13,5 +13,6 @@ export const Default: Story = {
   args: {
     statuses: [],
     tasks: [],
+    boardSlug: "PZP",
   },
 };
