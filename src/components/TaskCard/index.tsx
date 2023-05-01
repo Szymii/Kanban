@@ -36,7 +36,7 @@ export const TaskCard = ({
     <div className="flex w-full justify-between bg-base-100 p-2 shadow-md">
       <div className="flex items-center gap-4">
         <TaskMeta number={number} type={type} boardSlug={boardSlug} />
-        <div className="max-w-md truncate">{text}</div>
+        <div className="max-w-[180px] truncate md:max-w-md">{text}</div>
       </div>
       <Avatar name="B" surname="A" avatarUrl={""} size="xs" />
     </div>
