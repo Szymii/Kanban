@@ -22,6 +22,7 @@ export const BacklogSection = ({ tasks, boardSlug }: IProps) => {
             text={task.title}
             type={task.type}
             key={task.id}
+            path={`/board/${boardSlug}/${task.number}`}
           />
         ))}
       </Column>
@@ -34,6 +35,7 @@ export const BacklogSection = ({ tasks, boardSlug }: IProps) => {
             text={task.title}
             type={task.type}
             key={task.id}
+            path={`/board/${boardSlug}/${task.number}`}
           />
         ))}
       </Column>

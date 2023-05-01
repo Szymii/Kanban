@@ -24,6 +24,7 @@ export const BoardSection = ({ statuses, tasks, boardSlug }: IProps) => {
                 text={task.title}
                 type={task.type}
                 key={task.id}
+                path={`${boardSlug}/${task.number}`}
               />
             ))}
           </Column>

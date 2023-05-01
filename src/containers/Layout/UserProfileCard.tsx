@@ -16,24 +16,27 @@ export const UserProfileCard = ({
   logoutFunction,
 }: IProps) => {
   return (
-    <ul className="menu menu-horizontal bg-base-100">
-      <li tabIndex={0}>
-        <div className="flex items-center space-x-4 p-4">
+    <div className="dropdown-bottom dropdown-end dropdown ">
+      <label tabIndex={0} className="m-1 cursor-pointer bg-slate-200 ">
+        <div className="flex items-center space-x-4 p-4 hover:bg-slate-100">
           <Avatar name={name} surname={surname} avatarUrl={avatarUrl} />
           <div className="pr-4">
             <div className="font-medium">{`${name} ${surname}`}</div>
             <div className="text-sm text-gray-500">View profile</div>
           </div>
         </div>
-        <ul className="z-10 w-full bg-base-100 shadow-sm">
-          <li>
-            <Link href={"/profile"}>Profile</Link>
-          </li>
-          <li className="border-t border-gray-200">
-            <a onClick={logoutFunction}>Logout</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+      </label>
+      <ul
+        tabIndex={0}
+        className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+      >
+        <li>
+          <Link href={"/profile"}>Profile</Link>
+        </li>
+        <li>
+          <a onClick={logoutFunction}>Logout</a>
+        </li>
+      </ul>
+    </div>
   );
 };

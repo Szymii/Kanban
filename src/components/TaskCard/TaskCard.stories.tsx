@@ -15,6 +15,7 @@ export const Default: Story = {
     number: 11,
     type: "STORY",
     boardSlug: "PZP",
+    path: "/",
   },
 };
 
@@ -24,5 +25,6 @@ export const LongText: Story = {
     number: 11,
     type: "STORY",
     boardSlug: "PZP",
+    path: "/",
   },
 };

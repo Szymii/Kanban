@@ -15,6 +15,7 @@ interface IProps {
 
 export const HeaderSection = ({ users, isOwner }: IProps) => {
   const router = useRouter();
+  const onBacklog = router.asPath.includes("backlog");
 
   return (
     <div className="flex w-full justify-between">
@@ -32,7 +33,19 @@ export const HeaderSection = ({ users, isOwner }: IProps) => {
         <button className="btn-primary btn ">Create Task</button>
         <Menu>
           {isOwner && <a>Remove Board</a>}
-          <a onClick={() => router.push(`${router.asPath}/backlog`)}>Backlog</a>
+          {onBacklog ? (
+            <a
+              onClick={() =>
+                router.push(`${router.asPath.replace("backlog", "")}`)
+              }
+            >
+              Board
+            </a>
+          ) : (
+            <a onClick={() => router.push(`${router.asPath}/backlog`)}>
+              Backlog
+            </a>
+          )}
         </Menu>
       </div>
     </div>

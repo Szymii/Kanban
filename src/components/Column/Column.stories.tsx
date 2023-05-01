@@ -19,6 +19,7 @@ export const Default: Story = {
         number={199}
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         type="STORY"
+        path="/"
       />
     ),
   },
@@ -36,6 +37,7 @@ export const WithAction: Story = {
         number={199}
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         type="STORY"
+        path="/"
       />
     ),
   },
@@ -51,6 +53,7 @@ export const Vertical: Story = {
         text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         type="STORY"
         variant="inline"
+        path="/"
       />
     ),
   },
