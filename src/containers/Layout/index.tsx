@@ -21,7 +21,9 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           avatarUrl={user.image}
           logoutFunction={() => void signOut()}
         />
-        <main className="mx-auto max-w-[1580px] px-4 pb-8">{children}</main>
+        <main className="mx-auto min-h-[calc(100vh-104px)] max-w-[1580px] px-4 pb-8">
+          {children}
+        </main>
       </div>
     </UserProvider>
   );
