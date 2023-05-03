@@ -17,7 +17,9 @@ export default function Task() {
         <TaskHeader taskTitle="Testowanko asda sdasd" />
         <TaskActions />
         <TaskContent />
-        <TaskTimestamps />
+        <div className="mt-auto">
+          <TaskTimestamps createdAt="23.03.2030" updatedAt="23.03.2030" />
+        </div>
       </Layout>
     </>
   );

@@ -8,9 +8,30 @@ export default {
 
 export const Default: StoryObj<typeof Menu> = {
   render: () => (
-    <Menu>
-      <a>Backlog</a>
-      <a>Remove board</a>
-    </Menu>
+    <div className="ml-56">
+      <Menu>
+        <a>Backlog</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+      </Menu>
+    </div>
+  ),
+};
+
+export const Scrollable: StoryObj<typeof Menu> = {
+  render: () => (
+    <div className="ml-56">
+      <Menu>
+        <a>Backlog</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+        <a>Remove board</a>
+      </Menu>
+    </div>
   ),
 };
