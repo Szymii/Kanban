@@ -74,4 +74,44 @@ export const boardRouter = createTRPCRouter({
         result: result,
       };
     }),
+  delete: protectedProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const exists = await ctx.prisma.board.findFirst({
+        where: { slug: input.slug },
+      });
+
+      if (!exists) {
+        throw new TRPCError({
+          message: "Board don't exists.",
+          code: "NOT_FOUND",
+        });
+      }
+
+      await ctx.prisma.board.update({
+        where: {
+          slug: input.slug,
+        },
+        data: {
+          statuses: {
+            deleteMany: {},
+          },
+        },
+      });
+
+      await ctx.prisma.board.delete({
+        where: {
+          slug: input.slug,
+        },
+      });
+
+      return {
+        status: 201,
+        message: "Board deleted successfully",
+      };
+    }),
 });

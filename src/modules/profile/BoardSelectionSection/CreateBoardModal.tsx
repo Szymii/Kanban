@@ -25,8 +25,8 @@ export const CreateBoardModal = () => {
       if (result.status === 201) {
         methods.reset();
         showNotification({
-          id: "board-created-succesfully",
-          message: "Board created succesfully",
+          id: "board-created-successfully",
+          message: "Board created successfully",
           type: "success",
         });
       }

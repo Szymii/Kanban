@@ -29,6 +29,7 @@ const ConnectedBoard = ({ slug }: IProps) => {
           name: member.firstName,
           surname: member.lastName,
         }))}
+        boardSlug={board.slug}
       />
       <BoardSection statuses={statuses} tasks={tasks} boardSlug={board.slug} />
     </>
