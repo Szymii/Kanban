@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <>
       <PublicMeta />
-      <PublicLayout>{"Hello"}</PublicLayout>
+      <PublicLayout>
+        <></>
+      </PublicLayout>
     </>
   );
 }

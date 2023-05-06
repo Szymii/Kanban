@@ -1,35 +1,26 @@
-import { useId } from "react";
+import { type ComponentProps, useId } from "react";
 import { useFormContext } from "react-hook-form";
+import { type TextField } from "src/components/FormFields";
 
-interface IProps {
-  label: string;
-  name: string;
-  tooltip?: string;
-  type: "text" | "email" | "password";
-  placeholder?: string;
-  required?: boolean;
-  disabled?: boolean;
+interface IProps extends ComponentProps<typeof TextField> {
+  passwordField: string;
 }
 
-export const TextField = ({
+export const ConfirmPasswordField = ({
   label,
   name,
   type,
   required = false,
   disabled = false,
   placeholder,
+  passwordField,
 }: IProps) => {
   const id = useId();
   const {
     register,
+    watch,
     formState: { errors },
   } = useFormContext();
-
-  const validation = {
-    text: { minLength: 4, maxLength: 20 },
-    email: {},
-    password: { minLength: 4, maxLength: 20 },
-  };
 
   return (
     <div className="form-control w-full">
@@ -41,7 +32,14 @@ export const TextField = ({
       </label>
       <input
         type={type}
-        {...register(name, { required, ...validation[type] })}
+        {...register(name, {
+          required,
+          validate: (value: string) => {
+            if (watch(passwordField) !== value) {
+              return "Your passwords do no match";
+            }
+          },
+        })}
         id={id}
         placeholder={placeholder}
         className={`input-bordered input w-full ${

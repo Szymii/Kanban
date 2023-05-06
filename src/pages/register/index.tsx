@@ -30,7 +30,7 @@ export default function Login() {
     <>
       <PublicMeta />
       <PublicLayout>
-        <div className="flex items-center justify-center pt-24 ">
+        <div className="flex items-center justify-center">
           <div className="container mx-auto flex flex-col items-center justify-center gap-16 px-8 lg:flex-row">
             <Image
               priority

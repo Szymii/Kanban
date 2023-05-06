@@ -7,7 +7,7 @@ export const PublicLayout = ({ children }: { children: ReactNode }) => {
       <div className="mb-6 flex h-20 items-center justify-between pl-4 shadow-sm">
         <Logo href="/" />
       </div>
-      <main className="pb-16">{children}</main>
+      <main className="-mt-2 pb-16 lg:pt-24">{children}</main>
     </div>
   );
 };
