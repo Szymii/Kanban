@@ -16,7 +16,7 @@ interface IRegisterData {
 
 export const RegisterForm = () => {
   const methods = useForm<IRegisterData>();
-  const { mutateAsync } = api.auth.signUp.useMutation();
+  const { mutateAsync, isLoading } = api.auth.signUp.useMutation();
   const showNotification = useToastConsumer();
 
   const onSubmit = async (data: IRegisterData) => {
@@ -71,7 +71,11 @@ export const RegisterForm = () => {
           type="password"
           required
         />
-        <button className="btn-primary btn-active btn mt-4 w-full">
+        <button
+          className={`${
+            isLoading ? "disabled" : ""
+          } btn-primary btn-active btn mt-4 w-full`}
+        >
           Register
         </button>
       </form>

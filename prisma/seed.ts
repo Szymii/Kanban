@@ -23,13 +23,13 @@ async function main() {
               createMany: {
                 data: [
                   {
-                    name: "to do",
+                    name: "To Do",
                   },
                   {
-                    name: "in progress",
+                    name: "In Progress",
                   },
                   {
-                    name: "done",
+                    name: "Done",
                   },
                 ],
               },
@@ -58,23 +58,23 @@ async function main() {
               data: [
                 {
                   id: "1231",
-                  name: "to do",
+                  name: "To Do",
                 },
                 {
                   id: "1232",
-                  name: "in progress",
+                  name: "In Progress",
                 },
                 {
                   id: "1233",
-                  name: "for tests",
+                  name: "For Tests",
                 },
                 {
                   id: "1234",
-                  name: "testing",
+                  name: "Testing",
                 },
                 {
                   id: "1235",
-                  name: "done",
+                  name: "Done",
                 },
               ],
             },
