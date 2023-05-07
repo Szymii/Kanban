@@ -4,7 +4,9 @@ import { Avatar } from "src/components/Avatar";
 import { AvatarGroup } from "src/components/AvatarGroup";
 import { Menu } from "src/components/Menu";
 
+import { AddMemberModal } from "./AddMemberModal";
 import { RemoveBoardModal } from "./RemoveBoardModal";
+import { ShowAddMemberModalBtn } from "./ShowAddMemberModalBtn";
 
 interface User extends ComponentProps<typeof Avatar> {
   id: string;
@@ -23,17 +25,21 @@ export const HeaderSection = ({ users, isOwner, boardSlug }: IProps) => {
   return (
     <>
       <RemoveBoardModal slug={boardSlug} />
+      <AddMemberModal slug={boardSlug} />
       <div className="flex w-full justify-between">
-        <AvatarGroup>
-          {users.map((user) => (
-            <Avatar
-              name={user.name}
-              surname={user.surname}
-              avatarUrl={user?.avatarUrl}
-              key={user.id}
-            />
-          ))}
-        </AvatarGroup>
+        <div className="flex items-center gap-4">
+          <AvatarGroup>
+            {users.map((user) => (
+              <Avatar
+                name={user.name}
+                surname={user.surname}
+                avatarUrl={user?.avatarUrl}
+                key={user.id}
+              />
+            ))}
+          </AvatarGroup>
+          {isOwner && <ShowAddMemberModalBtn />}
+        </div>
         <div className="flex items-center justify-center gap-4">
           <button className="btn-primary btn ">Create Task</button>
           <Menu>

@@ -23,6 +23,48 @@ export const boardRouter = createTRPCRouter({
 
       return board;
     }),
+  addMember: protectedProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+        email: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const user = await ctx.prisma.user.findFirst({
+        where: { email: input.email },
+        include: {
+          boards: true,
+        },
+      });
+
+      const exist = user?.boards.find((board) => board.slug === input.slug);
+
+      if (exist) {
+        throw new TRPCError({
+          message: "Member already exists.",
+          code: "CONFLICT",
+        });
+      }
+
+      await ctx.prisma.board.update({
+        where: {
+          slug: input.slug,
+        },
+        data: {
+          members: {
+            connect: {
+              email: input.email,
+            },
+          },
+        },
+      });
+
+      return {
+        status: 201,
+        message: "Member added successfully",
+      };
+    }),
   create: protectedProcedure
     .input(
       z.object({
