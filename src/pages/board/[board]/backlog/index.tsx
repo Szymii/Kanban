@@ -19,7 +19,7 @@ const ConnectedBacklog = ({ slug }: IProps) => {
     return null;
   }
 
-  const { members, tasks } = board;
+  const { members, tasks, statuses } = board;
 
   return (
     <>
@@ -31,6 +31,7 @@ const ConnectedBacklog = ({ slug }: IProps) => {
           surname: member.lastName,
         }))}
         boardSlug={slug}
+        statuses={statuses}
       />
       <BacklogSection tasks={tasks} boardSlug={board.slug} />
     </>

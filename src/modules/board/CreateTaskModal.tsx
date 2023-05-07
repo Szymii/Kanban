@@ -1,21 +1,27 @@
+import type { Status } from "@prisma/client";
 import { FormProvider, useForm } from "react-hook-form";
 import { Modal, ModalButton } from "src/components/Modal";
 import { useToastConsumer } from "src/containers/Toasts";
+import { api } from "src/utils/api";
 
 // import { api } from "src/utils/api";
 import { CreateTaskForm } from "./CreateTaskForm";
 
 interface IProps {
-  slug: string;
+  statuses: Status[];
 }
 
 interface ICreateTaskData {
-  userEmail: string;
+  title: string;
+  description: string;
+  type: string;
+  status: string;
 }
 
-export const CreateTaskModal = ({ slug }: IProps) => {
+export const CreateTaskModal = ({ statuses }: IProps) => {
   const methods = useForm<ICreateTaskData>();
   const showNotification = useToastConsumer();
+  // const statuses = api.board.getStatuses
   // const utils = api.useContext();
   // const { mutateAsync, isLoading } = api.board.addMember.useMutation({
   //   async onSettled() {
@@ -48,7 +54,7 @@ export const CreateTaskModal = ({ slug }: IProps) => {
     <FormProvider {...methods}>
       <Modal
         header="Create task"
-        content={<CreateTaskForm />}
+        content={<CreateTaskForm statuses={statuses} />}
         id="create-task-modal"
         modalBtn={
           <>
@@ -58,7 +64,7 @@ export const CreateTaskModal = ({ slug }: IProps) => {
               action={methods.handleSubmit(addMember)}
               // disabled={isLoading}
             >
-              Invite
+              Create
             </ModalButton>
             <ModalButton
               modalId="create-task-modal"

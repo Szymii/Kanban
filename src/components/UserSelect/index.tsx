@@ -13,9 +13,9 @@ export interface UserSelectOption {
 
 interface IProps {
   users: IUser[];
-  selectedUserId: string;
-  disable: boolean;
-  action: (
+  selectedUserId?: string;
+  disable?: boolean;
+  action?: (
     option: UserSelectOption | null,
     actionMeta: ActionMeta<UserSelectOption>,
   ) => void;

@@ -1,3 +1,4 @@
+import { type Status } from "@prisma/client";
 import { useRouter } from "next/router";
 import { type ComponentProps } from "react";
 import { Avatar } from "src/components/Avatar";
@@ -14,12 +15,18 @@ interface User extends ComponentProps<typeof Avatar> {
 }
 
 interface IProps {
+  statuses: Status[];
   users: User[];
   isOwner: boolean;
   boardSlug: string;
 }
 
-export const HeaderSection = ({ users, isOwner, boardSlug }: IProps) => {
+export const HeaderSection = ({
+  statuses,
+  users,
+  isOwner,
+  boardSlug,
+}: IProps) => {
   const router = useRouter();
   const onBacklog = router.asPath.includes("backlog");
 
@@ -27,7 +34,7 @@ export const HeaderSection = ({ users, isOwner, boardSlug }: IProps) => {
     <>
       <RemoveBoardModal slug={boardSlug} />
       <AddMemberModal slug={boardSlug} />
-      <CreateTaskModal slug={boardSlug} />
+      <CreateTaskModal statuses={statuses} />
       <div className="flex w-full justify-between">
         <div className="flex items-center gap-4">
           <AvatarGroup>
