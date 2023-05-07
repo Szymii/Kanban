@@ -5,6 +5,7 @@ import { AvatarGroup } from "src/components/AvatarGroup";
 import { Menu } from "src/components/Menu";
 
 import { AddMemberModal } from "./AddMemberModal";
+import { CreateTaskModal } from "./CreateTaskModal";
 import { RemoveBoardModal } from "./RemoveBoardModal";
 import { ShowAddMemberModalBtn } from "./ShowAddMemberModalBtn";
 
@@ -26,6 +27,7 @@ export const HeaderSection = ({ users, isOwner, boardSlug }: IProps) => {
     <>
       <RemoveBoardModal slug={boardSlug} />
       <AddMemberModal slug={boardSlug} />
+      <CreateTaskModal slug={boardSlug} />
       <div className="flex w-full justify-between">
         <div className="flex items-center gap-4">
           <AvatarGroup>
@@ -41,7 +43,9 @@ export const HeaderSection = ({ users, isOwner, boardSlug }: IProps) => {
           {isOwner && <ShowAddMemberModalBtn />}
         </div>
         <div className="flex items-center justify-center gap-4">
-          <button className="btn-primary btn ">Create Task</button>
+          <label className="btn-primary btn" htmlFor="create-task-modal">
+            Create Task
+          </label>
           <Menu>
             {isOwner && (
               <label htmlFor={"remove-board-modal"}>
