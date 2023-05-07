@@ -1,7 +1,8 @@
 import type { Type } from "@prisma/client";
 import Link from "next/link";
+import { type IUser } from "src/modules/profile";
 
-import { Avatar } from "../Avatar";
+import { Avatar, EmptyAvatar } from "../Avatar";
 import { TaskMeta } from "./TaskMeta";
 
 interface IProps {
@@ -10,8 +11,8 @@ interface IProps {
   type: Type;
   boardSlug: string;
   path: string;
-  userId?: string;
   variant?: "block" | "inline";
+  assignedUser?: Omit<IUser, "id">;
 }
 
 export const TaskCard = ({
@@ -21,7 +22,7 @@ export const TaskCard = ({
   text,
   boardSlug,
   path,
-  userId,
+  assignedUser,
 }: IProps) => {
   if (variant === "block") {
     return (
@@ -31,7 +32,23 @@ export const TaskCard = ({
         </Link>
         <div className="flex items-center justify-between pt-2">
           <TaskMeta number={number} type={type} boardSlug={boardSlug} />
-          <Avatar name="B" surname="A" avatarUrl={""} size="xs" />
+          {assignedUser ? (
+            <div
+              className="tooltip"
+              data-tip={`${assignedUser.firstName} ${assignedUser.lastName}`}
+            >
+              <Avatar
+                name={assignedUser.firstName}
+                surname={assignedUser.lastName}
+                avatarUrl={assignedUser.image}
+                size="xs"
+              />
+            </div>
+          ) : (
+            <div className="tooltip" data-tip="Not assigned">
+              <EmptyAvatar size="xs" />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -48,7 +65,23 @@ export const TaskCard = ({
           {text}
         </Link>
       </div>
-      <Avatar name="B" surname="A" avatarUrl={""} size="xs" />
+      {assignedUser ? (
+        <div
+          className="tooltip"
+          data-tip={`${assignedUser.firstName} ${assignedUser.lastName}`}
+        >
+          <Avatar
+            name={assignedUser.firstName}
+            surname={assignedUser.lastName}
+            avatarUrl={assignedUser.image}
+            size="xs"
+          />
+        </div>
+      ) : (
+        <div className="tooltip" data-tip="Not assigned">
+          <EmptyAvatar size="xs" />
+        </div>
+      )}
     </div>
   );
 };

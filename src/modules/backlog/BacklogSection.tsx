@@ -1,9 +1,11 @@
-import type { Task } from "@prisma/client";
+import type { Task, User } from "@prisma/client";
 import { Column } from "src/components/Column";
 import { TaskCard } from "src/components/TaskCard";
 
 interface IProps {
-  tasks: Task[];
+  tasks: (Task & {
+    member: User | null;
+  })[];
   boardSlug: string;
 }
 
@@ -23,6 +25,7 @@ export const BacklogSection = ({ tasks, boardSlug }: IProps) => {
             type={task.type}
             key={task.id}
             path={`/board/${boardSlug}/${task.number}`}
+            assignedUser={task.member ?? undefined}
           />
         ))}
       </Column>

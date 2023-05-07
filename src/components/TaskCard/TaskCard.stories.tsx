@@ -16,15 +16,23 @@ export const Default: Story = {
     type: "STORY",
     boardSlug: "PZP",
     path: "/",
+    assignedUser: {
+      firstName: "Szymon",
+      lastName: "Melzer",
+    },
   },
 };
 
 export const LongText: Story = {
   args: {
+    ...Default.args,
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    number: 11,
-    type: "STORY",
-    boardSlug: "PZP",
-    path: "/",
+  },
+};
+
+export const WithoutAssignment: Story = {
+  args: {
+    ...Default.args,
+    assignedUser: undefined,
   },
 };

@@ -17,7 +17,11 @@ export const boardRouter = createTRPCRouter({
         include: {
           members: true,
           statuses: true,
-          tasks: true,
+          tasks: {
+            include: {
+              member: true,
+            },
+          },
         },
       });
 

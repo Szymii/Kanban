@@ -99,6 +99,11 @@ async function main() {
           id: "1231",
         },
       },
+      member: {
+        connect: {
+          email: "admin@example.com",
+        },
+      },
       type: Type.TASK,
       title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       description:
