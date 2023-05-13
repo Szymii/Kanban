@@ -4,6 +4,25 @@ import { getNextNumber } from "src/server/task";
 import { z } from "zod";
 
 export const taskRouter = createTRPCRouter({
+  getTask: protectedProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+        taskNumber: z.string(),
+      }),
+    )
+    .query(({ input, ctx }) => {
+      const task = ctx.prisma.task.findFirst({
+        where: {
+          board: {
+            slug: input.slug,
+          },
+          number: Number(input.taskNumber),
+        },
+      });
+
+      return task;
+    }),
   addTask: protectedProcedure
     .input(
       z.object({

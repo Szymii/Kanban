@@ -20,17 +20,14 @@ export const Default: Story = {
       {
         label: "Error",
         value: "error",
-        selected: false,
       },
       {
         label: "Task",
         value: "task",
-        selected: true,
       },
       {
         label: "Story",
         value: "story",
-        selected: false,
       },
     ],
   },
