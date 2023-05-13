@@ -7,7 +7,7 @@ interface IProps {
   tooltip?: string;
   required?: boolean;
   disabled?: boolean;
-  options: { value: string; label: string; selected: boolean }[];
+  options: { value: string; label: string }[];
 }
 
 export const SelectField = ({
@@ -40,11 +40,7 @@ export const SelectField = ({
         disabled={disabled}
       >
         {options.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            selected={option.selected}
-          >
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}

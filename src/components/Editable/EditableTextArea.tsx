@@ -9,16 +9,23 @@ export const EditableTextArea = ({ defaultText }: IProps) => {
   const resizeTextarea = useResizeTextArea();
 
   useEffect(() => {
-    if (areaRef.current) {
-      areaRef.current.style.height = "0";
-      areaRef.current.style.height = `${areaRef.current.scrollHeight + 5}px`;
+    if (!areaRef.current) {
+      return;
     }
+
+    if (areaRef.current.scrollHeight <= 159) {
+      areaRef.current.style.height = `161px`;
+      return;
+    }
+
+    areaRef.current.style.height = "0";
+    areaRef.current.style.height = `${areaRef.current.scrollHeight + 5}px`;
   }, [areaRef]);
 
   return (
     <>
       <textarea
-        className="textarea-ghost textarea w-full"
+        className="textarea-bordered textarea w-full"
         rows={2}
         placeholder="Description"
         ref={areaRef}
@@ -37,9 +44,16 @@ export const EditableTextArea = ({ defaultText }: IProps) => {
 
 const useResizeTextArea = () => {
   return (areaRef: HTMLTextAreaElement | null) => {
-    if (areaRef) {
-      areaRef.style.height = "0";
-      areaRef.style.height = `${areaRef.scrollHeight + 5}px`;
+    if (!areaRef) {
+      return;
     }
+
+    if (areaRef.scrollHeight <= 159) {
+      areaRef.style.height = `161px`;
+      return;
+    }
+
+    areaRef.style.height = "0";
+    areaRef.style.height = `${areaRef.scrollHeight + 5}px`;
   };
 };

@@ -1,19 +1,16 @@
 export const useCategories = () => {
   return [
     {
-      label: "Bug",
-      value: "bug",
-      selected: false,
+      label: "Task",
+      value: "TASK",
     },
     {
-      label: "Task",
-      value: "task",
-      selected: true,
+      label: "Bug",
+      value: "BUG",
     },
     {
       label: "Story",
-      value: "story",
-      selected: false,
+      value: "STORY",
     },
   ];
 };

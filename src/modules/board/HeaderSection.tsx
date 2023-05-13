@@ -34,7 +34,7 @@ export const HeaderSection = ({
     <>
       <RemoveBoardModal slug={boardSlug} />
       <AddMemberModal slug={boardSlug} />
-      <CreateTaskModal statuses={statuses} />
+      <CreateTaskModal slug={boardSlug} statuses={statuses} />
       <div className="flex w-full justify-between">
         <div className="flex items-center gap-4">
           <AvatarGroup>

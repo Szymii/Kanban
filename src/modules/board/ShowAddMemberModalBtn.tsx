@@ -1,6 +1,6 @@
 export const ShowAddMemberModalBtn = () => {
   return (
-    <div className="tooltip" data-tip="Add member">
+    <div className="tooltip tooltip-bottom" data-tip="Add member">
       <label htmlFor="add-member-modal" className="btn-primary btn-circle btn">
         <svg
           width="81"

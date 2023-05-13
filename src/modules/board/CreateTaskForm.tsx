@@ -15,8 +15,7 @@ export const CreateTaskForm = (props: IProps) => {
   const categories = useCategories();
   const statuses = props.statuses.map((status) => ({
     label: status.name,
-    value: status.name,
-    selected: false,
+    value: status.id,
   }));
 
   return (
@@ -26,12 +25,11 @@ export const CreateTaskForm = (props: IProps) => {
       <SelectField label="Task category" name="type" options={categories} />
       <SelectField
         label="Task status"
-        name="status"
+        name="statusId"
         options={[
           {
             label: "Backlog",
             value: "",
-            selected: true,
           },
           ...statuses,
         ]}

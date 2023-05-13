@@ -1,50 +1,49 @@
-import type { Status } from "@prisma/client";
+import type { Status, Type } from "@prisma/client";
 import { FormProvider, useForm } from "react-hook-form";
 import { Modal, ModalButton } from "src/components/Modal";
 import { useToastConsumer } from "src/containers/Toasts";
 import { api } from "src/utils/api";
 
-// import { api } from "src/utils/api";
 import { CreateTaskForm } from "./CreateTaskForm";
 
 interface IProps {
   statuses: Status[];
+  slug: string;
 }
 
 interface ICreateTaskData {
   title: string;
   description: string;
-  type: string;
-  status: string;
+  type: Type;
+  statusId: string;
 }
 
-export const CreateTaskModal = ({ statuses }: IProps) => {
+export const CreateTaskModal = ({ statuses, slug }: IProps) => {
   const methods = useForm<ICreateTaskData>();
   const showNotification = useToastConsumer();
-  // const statuses = api.board.getStatuses
-  // const utils = api.useContext();
-  // const { mutateAsync, isLoading } = api.board.addMember.useMutation({
-  //   async onSettled() {
-  //     await utils.board.getEnhancedBoard.invalidate();
-  //   },
-  // });
+  const utils = api.useContext();
+  const { mutateAsync, isLoading } = api.task.addTask.useMutation({
+    async onSettled() {
+      await utils.board.getEnhancedBoard.invalidate();
+    },
+  });
 
-  const addMember = (data: ICreateTaskData) => {
+  const addTask = async (data: ICreateTaskData) => {
     try {
-      // const result = await mutateAsync({ slug, email: data.userEmail });
-      // if (result.status === 201) {
-      //   methods.reset();
-      //   showNotification({
-      //     id: "",
-      //     message: "",
-      //     type: "success",
-      //   });
-      // }
+      const result = await mutateAsync({ ...data, slug });
+      if (result.status === 201) {
+        // methods.reset();
+        showNotification({
+          id: "created-new-task",
+          message: "Created new task",
+          type: "success",
+        });
+      }
     } catch (e) {
       const { message } = e as { message: string };
       showNotification({
-        id: "",
-        message: message ?? "",
+        id: "failed-to-create-task",
+        message: message ?? "Failed to create task",
         type: "error",
       });
     }
@@ -61,8 +60,8 @@ export const CreateTaskModal = ({ statuses }: IProps) => {
             <ModalButton
               modalId="create-task-modal"
               variant={"confirm"}
-              action={methods.handleSubmit(addMember)}
-              // disabled={isLoading}
+              action={methods.handleSubmit(addTask)}
+              disabled={isLoading}
             >
               Create
             </ModalButton>
@@ -72,7 +71,7 @@ export const CreateTaskModal = ({ statuses }: IProps) => {
               action={() => {
                 methods.reset();
               }}
-              // disabled={isLoading}
+              disabled={isLoading}
             >
               Cancel
             </ModalButton>
