@@ -1,4 +1,42 @@
-export const useTaskLinks = () => {
+import type { Type } from "@prisma/client";
+
+interface IProps {
+  type: Type;
+  slug: string;
+  number: string;
+}
+
+export const useTaskLinks = ({ type, slug, number }: IProps) => {
+  const taskIcon = {
+    STORY: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        className="mr-2 h-4 w-4 fill-green-500 stroke-current "
+      >
+        <rect x="10" y="10" width="80" height="80" rx="10" />
+      </svg>
+    ),
+    BUG: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        className="mr-2 h-4 w-4 fill-red-500 stroke-current"
+      >
+        <rect x="10" y="10" width="80" height="80" rx="10" />
+      </svg>
+    ),
+    TASK: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        className="mr-2 h-4 w-4 fill-blue-500 stroke-current"
+      >
+        <rect x="10" y="10" width="80" height="80" rx="10" />
+      </svg>
+    ),
+  };
+
   return [
     {
       icon: (
@@ -16,26 +54,12 @@ export const useTaskLinks = () => {
           ></path>
         </svg>
       ),
-      name: "PZP",
-      href: "/board/ADM",
+      name: slug,
+      href: `/board/${slug}`,
     },
     {
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="mr-2 h-4 w-4 stroke-current"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-          ></path>
-        </svg>
-      ),
-      name: "PZP-119",
+      icon: taskIcon[type],
+      name: `${slug}-${number}`,
     },
   ];
 };

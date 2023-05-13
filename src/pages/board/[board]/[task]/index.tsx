@@ -17,13 +17,16 @@ interface IProps {
 }
 
 const ConnectedTask = ({ slug, taskNumber }: IProps) => {
-  const links = useTaskLinks();
-
   const { data: board } = api.board.getEnhancedBoard.useQuery({ slug });
   const { data: task } = api.task.getTask.useQuery({
     slug,
     taskNumber,
   });
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+  const taskType = task?.type!;
+
+  const links = useTaskLinks({ type: taskType, slug, number: taskNumber });
 
   if (!task || !board) {
     return null;
