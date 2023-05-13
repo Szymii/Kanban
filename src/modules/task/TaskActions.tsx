@@ -17,8 +17,8 @@ export const TaskActions = ({
   selectedUserId,
 }: IProps) => {
   return (
-    <div className="flex items-center justify-between  py-4">
-      <div className="min-w-[250px]">
+    <div className="flex flex-col items-start justify-between gap-4 py-4 sm:flex-row sm:items-center">
+      <div className="w-full sm:max-w-[250px]">
         <UserSelect
           users={members}
           selectedUserId={selectedStatusId ?? undefined}
@@ -27,7 +27,7 @@ export const TaskActions = ({
           }}
         />
       </div>
-      <div className="min-w-[250px]">
+      <div className="w-full sm:max-w-[250px]">
         <TaskStatusSelect
           statuses={statuses}
           selectedStatusId={selectedUserId ?? undefined}
