@@ -13,9 +13,3 @@ export const TaskTimestamps = ({ createdAt, updatedAt }: IProps) => {
     </div>
   );
 };
-<main className="min-h-screen ">
-  <div>Test</div>
-  <div>Test</div>
-  <div>Test</div>
-  <div>Data</div>
-</main>;
