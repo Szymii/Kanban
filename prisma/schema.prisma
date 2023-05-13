@@ -54,7 +54,7 @@ model Task {
     type        Type
     title       String
     description String?
-    number      Int     @unique @default(autoincrement())
+    number      Int
 
     updatedAt DateTime @default(now())
     createdAt DateTime @updatedAt

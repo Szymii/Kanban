@@ -1,5 +1,6 @@
 import { Type } from "@prisma/client";
 import { createTRPCRouter, protectedProcedure } from "src/server/api/trpc";
+import { getNextNumber } from "src/server/task";
 import { z } from "zod";
 
 export const taskRouter = createTRPCRouter({
@@ -14,8 +15,13 @@ export const taskRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input, ctx }) => {
+      const number = await getNextNumber({
+        slug: input.slug,
+      });
+
       const task = await ctx.prisma.task.create({
         data: {
+          number,
           title: input.title,
           type: input.type,
           description: input.description,

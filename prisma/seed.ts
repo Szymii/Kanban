@@ -89,6 +89,7 @@ async function main() {
 
   await prisma.task.create({
     data: {
+      number: 1,
       board: {
         connect: {
           slug: "ADM",
@@ -113,6 +114,7 @@ async function main() {
 
   await prisma.task.create({
     data: {
+      number: 2,
       board: {
         connect: {
           slug: "ADM",
@@ -135,6 +137,7 @@ async function main() {
 
   await prisma.task.create({
     data: {
+      number: 3,
       board: {
         connect: {
           slug: "ADM",

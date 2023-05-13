@@ -1,0 +1,1 @@
+export { getNextNumber } from "./getNextNumber";
