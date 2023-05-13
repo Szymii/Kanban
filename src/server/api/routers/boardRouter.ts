@@ -146,6 +146,9 @@ export const boardRouter = createTRPCRouter({
           statuses: {
             deleteMany: {},
           },
+          tasks: {
+            deleteMany: {},
+          },
         },
       });
 
