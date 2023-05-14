@@ -1,12 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface IProps {
-  defaultText: string;
+  defaultText: string | null;
+  action: (value: string) => void;
+  isDisabled: boolean;
 }
 
-export const EditableTextArea = ({ defaultText }: IProps) => {
+export const EditableTextArea = ({
+  defaultText,
+  action,
+  isDisabled,
+}: IProps) => {
   const areaRef = useRef<HTMLTextAreaElement>(null);
   const resizeTextarea = useResizeTextArea();
+  const [value, setValue] = useState<string | null>(defaultText);
+
+  const showActionButtons = value !== defaultText;
 
   useEffect(() => {
     if (!areaRef.current) {
@@ -29,14 +38,38 @@ export const EditableTextArea = ({ defaultText }: IProps) => {
         rows={2}
         placeholder="Description"
         ref={areaRef}
-        defaultValue={defaultText}
+        value={value ?? ""}
         onInput={() => {
           resizeTextarea(areaRef.current);
         }}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+        disabled={isDisabled}
       />
-      <div className="mt-2 flex gap-2">
-        <button className="btn">Save</button>
-        <button className="btn-ghost btn">Cancel</button>
+      <div className="min-h-12 mt-2 flex gap-2">
+        {showActionButtons && (
+          <>
+            <button
+              className="btn"
+              onClick={() => {
+                action(value ?? "");
+              }}
+              disabled={isDisabled}
+            >
+              Save
+            </button>
+            <button
+              className="btn-ghost btn"
+              onClick={() => {
+                setValue(defaultText ?? "");
+              }}
+              disabled={isDisabled}
+            >
+              Cancel
+            </button>
+          </>
+        )}
       </div>
     </>
   );

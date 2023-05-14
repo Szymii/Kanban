@@ -44,7 +44,7 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
           selectedUserId={task.userId}
           taskId={task.id}
         />
-        <TaskContent taskId={task.id} />
+        <TaskContent taskDescription={task.description} taskId={task.id} />
         <TaskRelations taskId={task.id} />
         <div className="mt-auto">
           <TaskTimestamps

@@ -32,7 +32,7 @@ export const TaskHeader = ({ taskTitle, taskId }: IProps) => {
             });
           } catch (e) {
             showNotification({
-              id: "failed-to-add-member",
+              id: "failed-to-change-title",
               message: "Failed to change title",
               type: "error",
             });

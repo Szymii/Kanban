@@ -138,18 +138,26 @@ export const taskRouter = createTRPCRouter({
         message: "Title changed",
       };
     }),
-  // setDescription: protectedProcedure
-  //   .input(
-  //     z.object({
-  //       taskId: z.string(),
-  //       userId: z.string(),
-  //     }),
-  //   )
-  //   .mutation(async ({ input, ctx }) => {
-  //     //
-  //     return {
-  //       status: 200,
-  //       message: "Title changed",
-  //     };
-  //   }),
+  setDescription: protectedProcedure
+    .input(
+      z.object({
+        taskId: z.string(),
+        newDescription: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      await ctx.prisma.task.update({
+        where: {
+          id: input.taskId,
+        },
+        data: {
+          description: input.newDescription,
+        },
+      });
+
+      return {
+        status: 200,
+        message: "Description changed",
+      };
+    }),
 });
