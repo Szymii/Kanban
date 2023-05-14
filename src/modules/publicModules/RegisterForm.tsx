@@ -21,20 +21,18 @@ export const RegisterForm = () => {
 
   const onSubmit = async (data: IRegisterData) => {
     try {
-      const result = await mutateAsync(data);
-      if (result.status === 201) {
-        methods.reset();
-        showNotification({
-          id: "registration-failure",
-          message: "Success! User account created.",
-          type: "success",
-        });
+      await mutateAsync(data);
+      methods.reset();
+      showNotification({
+        id: "registration-failure",
+        message: "Success! User account created.",
+        type: "success",
+      });
 
-        await signIn("credentials", {
-          email: data.email,
-          password: data.password,
-        });
-      }
+      await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+      });
     } catch (e) {
       const { message } = e as { message: string };
 

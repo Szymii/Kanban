@@ -14,7 +14,7 @@ export interface UserSelectOption {
 interface IProps {
   users: IUser[];
   selectedUserId?: string;
-  disable?: boolean;
+  disabled?: boolean;
   action?: (
     option: UserSelectOption | null,
     actionMeta: ActionMeta<UserSelectOption>,
@@ -25,7 +25,7 @@ export const UserSelect = ({
   users,
   selectedUserId,
   action,
-  disable,
+  disabled,
 }: IProps) => {
   const options = [
     {
@@ -51,7 +51,7 @@ export const UserSelect = ({
       defaultValue={selectedUserId ? options[defaultOption] : options[0]}
       formatOptionLabel={CustomOptionLabel}
       onChange={action}
-      isDisabled={disable}
+      isDisabled={disabled}
     />
   );
 };

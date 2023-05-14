@@ -24,15 +24,13 @@ export const AddMemberModal = ({ slug }: IProps) => {
 
   const addMember = async (data: IAddMemberData) => {
     try {
-      const result = await mutateAsync({ slug, email: data.userEmail });
-      if (result.status === 201) {
-        methods.reset();
-        showNotification({
-          id: "added-new-member",
-          message: "Added new member",
-          type: "success",
-        });
-      }
+      await mutateAsync({ slug, email: data.userEmail });
+      methods.reset();
+      showNotification({
+        id: "added-new-member",
+        message: "Added new member",
+        type: "success",
+      });
     } catch (e) {
       const { message } = e as { message: string };
       showNotification({

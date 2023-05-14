@@ -30,15 +30,12 @@ export const CreateTaskModal = ({ statuses, slug }: IProps) => {
 
   const addTask = async (data: ICreateTaskData) => {
     try {
-      const result = await mutateAsync({ ...data, slug });
-      if (result.status === 201) {
-        // methods.reset();
-        showNotification({
-          id: "created-new-task",
-          message: "Created new task",
-          type: "success",
-        });
-      }
+      await mutateAsync({ ...data, slug });
+      showNotification({
+        id: "created-new-task",
+        message: "Created new task",
+        type: "success",
+      });
     } catch (e) {
       const { message } = e as { message: string };
       showNotification({

@@ -21,15 +21,13 @@ export const CreateBoardModal = () => {
 
   const onSubmit = async (data: ICreateBoarData) => {
     try {
-      const result = await mutateAsync(data);
-      if (result.status === 201) {
-        methods.reset();
-        showNotification({
-          id: "board-created-successfully",
-          message: "Board created successfully",
-          type: "success",
-        });
-      }
+      await mutateAsync(data);
+      methods.reset();
+      showNotification({
+        id: "board-created-successfully",
+        message: "Board created successfully",
+        type: "success",
+      });
     } catch (e) {
       const { message } = e as { message: string };
       showNotification({

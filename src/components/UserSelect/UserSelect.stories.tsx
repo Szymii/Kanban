@@ -16,13 +16,13 @@ export const Default: Story = {
       { id: "123", firstName: "Szymon", lastName: "Melzer" },
       { id: "321", firstName: "Piotr", lastName: "Maciejczak" },
     ],
-    disable: false,
+    disabled: false,
   },
 };
 
 export const Disable: Story = {
   args: {
     ...Default.args,
-    disable: true,
+    disabled: true,
   },
 };

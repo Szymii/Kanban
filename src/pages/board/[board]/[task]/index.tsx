@@ -40,8 +40,9 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
         <TaskActions
           members={board.members}
           statuses={board.statuses}
-          selectedStatusId={task.userId}
-          selectedUserId={task.statusId}
+          selectedStatusId={task.statusId}
+          selectedUserId={task.userId}
+          taskId={task.id}
         />
         <TaskContent />
         <TaskRelations />

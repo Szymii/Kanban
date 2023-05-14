@@ -19,16 +19,14 @@ export const RemoveBoardModal = ({ slug }: IProps) => {
 
   const remove = async () => {
     try {
-      const result = await mutateAsync({ slug });
-      if (result.status === 201) {
-        showNotification({
-          id: "board-deleted-successfully",
-          message: "Board deleted successfully",
-          type: "success",
-        });
+      await mutateAsync({ slug });
+      showNotification({
+        id: "board-deleted-successfully",
+        message: "Board deleted successfully",
+        type: "success",
+      });
 
-        await router.push("/profile");
-      }
+      await router.push("/profile");
     } catch (e) {
       const { message } = e as { message: string };
       showNotification({
