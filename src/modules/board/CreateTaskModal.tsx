@@ -37,10 +37,9 @@ export const CreateTaskModal = ({ statuses, slug }: IProps) => {
         type: "success",
       });
     } catch (e) {
-      const { message } = e as { message: string };
       showNotification({
         id: "failed-to-create-task",
-        message: message ?? "Failed to create task",
+        message: "Failed to create task",
         type: "error",
       });
     }

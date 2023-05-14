@@ -2,7 +2,7 @@ import EdiText from "react-editext";
 
 interface IProps {
   defaultText: string;
-  onSave: () => void;
+  onSave: (value: string) => void;
 }
 
 export const EditableInput = ({ defaultText, onSave }: IProps) => {

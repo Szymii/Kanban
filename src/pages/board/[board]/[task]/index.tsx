@@ -36,7 +36,7 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
     <>
       <Layout>
         <Breadcrumbs links={links} />
-        <TaskHeader taskTitle={task.title} />
+        <TaskHeader taskTitle={task.title} taskId={task.id} />
         <TaskActions
           members={board.members}
           statuses={board.statuses}
@@ -44,10 +44,13 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
           selectedUserId={task.userId}
           taskId={task.id}
         />
-        <TaskContent />
-        <TaskRelations />
+        <TaskContent taskId={task.id} />
+        <TaskRelations taskId={task.id} />
         <div className="mt-auto">
-          <TaskTimestamps createdAt="23.03.2030" updatedAt="23.03.2030" />
+          <TaskTimestamps
+            createdAt={task.createdAt.toLocaleDateString()}
+            updatedAt={task.updatedAt.toLocaleDateString()}
+          />
         </div>
       </Layout>
     </>

@@ -49,10 +49,9 @@ export const TaskActions = ({
                 });
               }
             } catch (e) {
-              const { message } = e as { message: string };
               showNotification({
                 id: "failed-to-assign-user",
-                message: message ?? "Failed to assign user",
+                message: "Failed to assign user",
                 type: "error",
               });
             }
