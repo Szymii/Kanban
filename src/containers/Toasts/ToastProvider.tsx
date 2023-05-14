@@ -33,7 +33,13 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const addToast = useCallback((toast: IToast) => {
-    setToasts((toasts) => [...toasts, toast]);
+    setToasts((toasts) => [
+      ...toasts,
+      {
+        ...toast,
+        id: toast.id + new Date().toString(),
+      },
+    ]);
   }, []);
 
   return (
