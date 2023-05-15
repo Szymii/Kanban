@@ -2,7 +2,7 @@ import { type ReactNode, createContext, useContext } from "react";
 
 import { type IUserData } from "./IUserData";
 
-interface IUser extends IUserData {
+interface IUser extends Omit<IUserData, "password"> {
   id: string;
 }
 

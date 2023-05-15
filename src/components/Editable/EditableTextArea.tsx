@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 interface IProps {
   defaultText: string | null;
   action: (value: string) => void;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 
 export const EditableTextArea = ({

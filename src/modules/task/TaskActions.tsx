@@ -6,7 +6,7 @@ import { api } from "src/utils/api";
 import { TaskStatusSelect } from "./TaskStatusSelect";
 
 interface IProps {
-  members: User[];
+  members: Omit<User, "password">[];
   statuses: Status[];
   selectedStatusId: string | null;
   selectedUserId: string | null;

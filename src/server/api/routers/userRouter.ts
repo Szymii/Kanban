@@ -1,18 +1,27 @@
+import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "src/server/api/trpc";
+import { excludeField } from "src/utils";
 
 export const userRouter = createTRPCRouter({
-  getUser: protectedProcedure.query(({ ctx }) => {
-    const user = ctx.prisma.user.findFirst({
+  getUser: protectedProcedure.query(async ({ ctx }) => {
+    const user = await ctx.prisma.user.findFirst({
       where: {
         id: ctx.session.user.id,
       },
     });
 
-    return user;
+    if (!user) {
+      throw new TRPCError({
+        message: "User not found.",
+        code: "NOT_FOUND",
+      });
+    }
+
+    return excludeField(user, ["password"]);
   }),
 
-  withBoards: protectedProcedure.query(({ ctx }) => {
-    const user = ctx.prisma.user.findFirst({
+  withBoards: protectedProcedure.query(async ({ ctx }) => {
+    const user = await ctx.prisma.user.findFirst({
       where: {
         id: ctx.session.user.id,
       },
@@ -21,6 +30,13 @@ export const userRouter = createTRPCRouter({
       },
     });
 
-    return user;
+    if (!user) {
+      throw new TRPCError({
+        message: "User not found.",
+        code: "NOT_FOUND",
+      });
+    }
+
+    return excludeField(user, ["password"]);
   }),
 });

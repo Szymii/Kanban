@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "src/server/api/trpc";
+import { excludeField } from "src/utils";
 import { z } from "zod";
 
 export const boardRouter = createTRPCRouter({
@@ -9,8 +10,8 @@ export const boardRouter = createTRPCRouter({
         slug: z.string(),
       }),
     )
-    .query(({ ctx, input }) => {
-      const board = ctx.prisma.board.findFirst({
+    .query(async ({ ctx, input }) => {
+      const board = await ctx.prisma.board.findFirst({
         where: {
           slug: input.slug,
         },
@@ -25,7 +26,27 @@ export const boardRouter = createTRPCRouter({
         },
       });
 
-      return board;
+      if (!board) {
+        throw new TRPCError({
+          message: "Board not found.",
+          code: "NOT_FOUND",
+        });
+      }
+
+      return {
+        ...board,
+        members: board.members.map((member) =>
+          excludeField(member, ["password"]),
+        ),
+        tasks: [
+          ...board.tasks.map((task) => ({
+            ...task,
+            member: task.member
+              ? excludeField(task.member, ["password"])
+              : null,
+          })),
+        ],
+      };
     }),
   addMember: protectedProcedure
     .input(

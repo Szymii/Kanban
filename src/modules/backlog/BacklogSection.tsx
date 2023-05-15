@@ -4,7 +4,7 @@ import { TaskCard } from "src/components/TaskCard";
 
 interface IProps {
   tasks: (Task & {
-    member: User | null;
+    member: Omit<User, "password"> | null;
   })[];
   boardSlug: string;
 }
