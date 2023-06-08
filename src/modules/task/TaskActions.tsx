@@ -31,6 +31,7 @@ export const TaskActions = ({
     api.task.setStatus.useMutation({
       async onSettled() {
         await utils.board.getEnhancedBoard.invalidate();
+        await utils.task.getAvailableStatuses.invalidate();
       },
     });
 
