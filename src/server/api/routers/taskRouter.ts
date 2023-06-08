@@ -1,4 +1,5 @@
 import { Type } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, protectedProcedure } from "src/server/api/trpc";
 import { getNextNumber } from "src/server/task";
 import { z } from "zod";
@@ -11,8 +12,8 @@ export const taskRouter = createTRPCRouter({
         taskNumber: z.string(),
       }),
     )
-    .query(({ input, ctx }) => {
-      const task = ctx.prisma.task.findFirst({
+    .query(async ({ input, ctx }) => {
+      const task = await ctx.prisma.task.findFirst({
         where: {
           board: {
             slug: input.slug,
@@ -21,7 +22,40 @@ export const taskRouter = createTRPCRouter({
         },
       });
 
+      if (!task) {
+        throw new TRPCError({
+          message: "Task does not exists.",
+          code: "NOT_FOUND",
+        });
+      }
+
       return task;
+    }),
+  getAvailableStatuses: protectedProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+        taskNumber: z.string(),
+      }),
+    )
+    .query(async ({ input, ctx }) => {
+      const board = await ctx.prisma.board.findFirst({
+        where: {
+          slug: input.slug,
+        },
+        include: {
+          statuses: true,
+        },
+      });
+
+      if (!board) {
+        throw new TRPCError({
+          message: "Board does not exists.",
+          code: "NOT_FOUND",
+        });
+      }
+
+      return board.statuses;
     }),
   addTask: protectedProcedure
     .input(
@@ -106,6 +140,50 @@ export const taskRouter = createTRPCRouter({
           member: {
             connect: {
               id: input.userId,
+            },
+          },
+        },
+      });
+
+      return {
+        status: 200,
+        message: "Assignment changed",
+      };
+    }),
+  setStatus: protectedProcedure
+    .input(
+      z.object({
+        taskId: z.string(),
+        statusId: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      if (input.statusId === "EMPTY") {
+        await ctx.prisma.task.update({
+          where: {
+            id: input.taskId,
+          },
+          data: {
+            status: {
+              disconnect: true,
+            },
+          },
+        });
+
+        return {
+          status: 200,
+          message: "Assignment changed",
+        };
+      }
+
+      await ctx.prisma.task.update({
+        where: {
+          id: input.taskId,
+        },
+        data: {
+          status: {
+            connect: {
+              id: input.statusId,
             },
           },
         },

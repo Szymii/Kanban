@@ -63,7 +63,14 @@ export const boardRouter = createTRPCRouter({
         },
       });
 
-      const exist = user?.boards.find((board) => board.slug === input.slug);
+      if (!user) {
+        throw new TRPCError({
+          message: "User does not exists.",
+          code: "NOT_FOUND",
+        });
+      }
+
+      const exist = user.boards.find((board) => board.slug === input.slug);
 
       if (exist) {
         throw new TRPCError({

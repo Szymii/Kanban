@@ -1,10 +1,13 @@
 import type { Status } from "@prisma/client";
-import RSelect from "react-select";
+import RSelect, { type ActionMeta } from "react-select";
 
 interface IProps {
   selectedStatusId?: string;
   disabled?: boolean;
-  onChange: () => void;
+  onChange: (
+    option: { value: string; label: string } | null,
+    actionMeta: ActionMeta<{ value: string; label: string }>,
+  ) => void;
   statuses: Status[];
 }
 
@@ -15,7 +18,7 @@ export const TaskStatusSelect = ({
   selectedStatusId,
 }: IProps) => {
   const options = [
-    { label: "Backlog", value: "" },
+    { label: "Backlog", value: "EMPTY" },
     ...statuses.map((status) => ({
       value: status.id,
       label: status.name,

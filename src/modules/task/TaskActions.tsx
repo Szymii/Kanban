@@ -7,7 +7,7 @@ import { TaskStatusSelect } from "./TaskStatusSelect";
 
 interface IProps {
   members: Omit<User, "password">[];
-  statuses: Status[];
+  availableStatuses: Status[];
   selectedStatusId: string | null;
   selectedUserId: string | null;
   taskId: string;
@@ -15,17 +15,25 @@ interface IProps {
 
 export const TaskActions = ({
   members,
-  statuses,
+  availableStatuses,
   selectedStatusId,
   selectedUserId,
   taskId,
 }: IProps) => {
   const utils = api.useContext();
-  const { mutateAsync, isLoading } = api.task.assign.useMutation({
-    async onSettled() {
-      await utils.board.getEnhancedBoard.invalidate();
-    },
-  });
+  const { mutateAsync: mutateAssign, isLoading: isLoadingAssign } =
+    api.task.assign.useMutation({
+      async onSettled() {
+        await utils.board.getEnhancedBoard.invalidate();
+      },
+    });
+  const { mutateAsync: mutateState, isLoading: isLoadingStatus } =
+    api.task.setStatus.useMutation({
+      async onSettled() {
+        await utils.board.getEnhancedBoard.invalidate();
+      },
+    });
+
   const showNotification = useToastConsumer();
 
   return (
@@ -37,7 +45,7 @@ export const TaskActions = ({
           action={async (option) => {
             try {
               if (option?.value) {
-                await mutateAsync({
+                await mutateAssign({
                   userId: option.value,
                   taskId,
                 });
@@ -56,17 +64,35 @@ export const TaskActions = ({
               });
             }
           }}
-          disabled={isLoading}
+          disabled={isLoadingAssign}
         />
       </div>
       <div className="w-full sm:max-w-[250px]">
         <TaskStatusSelect
-          statuses={statuses}
+          statuses={availableStatuses}
           selectedStatusId={selectedStatusId ?? undefined}
-          onChange={() => {
-            return;
+          onChange={async (option) => {
+            try {
+              if (option?.value) {
+                await mutateState({
+                  statusId: option.value,
+                  taskId,
+                });
+                showNotification({
+                  id: "status-changed",
+                  message: "Status changed",
+                  type: "success",
+                });
+              }
+            } catch (e) {
+              showNotification({
+                id: "failed-to-change-task-status",
+                message: "Failed to change task status",
+                type: "error",
+              });
+            }
           }}
-          disabled={false}
+          disabled={isLoadingStatus}
         />
       </div>
     </div>

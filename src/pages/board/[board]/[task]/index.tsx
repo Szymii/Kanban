@@ -22,13 +22,17 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
     slug,
     taskNumber,
   });
+  const { data: availableStatuses } = api.task.getAvailableStatuses.useQuery({
+    slug,
+    taskNumber,
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
   const taskType = task?.type!;
 
   const links = useTaskLinks({ type: taskType, slug, number: taskNumber });
 
-  if (!task || !board) {
+  if (!task || !board || !availableStatuses) {
     return null;
   }
 
@@ -39,7 +43,7 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
         <TaskHeader taskTitle={task.title} taskId={task.id} />
         <TaskActions
           members={board.members}
-          statuses={board.statuses}
+          availableStatuses={availableStatuses}
           selectedStatusId={task.statusId}
           selectedUserId={task.userId}
           taskId={task.id}
