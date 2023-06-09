@@ -14,7 +14,7 @@ export const CreateBoardModal = () => {
   const utils = api.useContext();
   const { mutateAsync, isLoading } = api.board.create.useMutation({
     async onSettled() {
-      await utils.user.withBoards.invalidate();
+      await utils.board.getBoards.invalidate();
     },
   });
   const showNotification = useToastConsumer();

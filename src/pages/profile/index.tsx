@@ -7,9 +7,9 @@ import {
 import { api } from "src/utils/api";
 
 export default function Profile() {
-  const { data: user } = api.user.withBoards.useQuery();
+  const { data: boards } = api.board.getBoards.useQuery();
 
-  if (!user) {
+  if (!boards) {
     return null;
   }
 
@@ -20,7 +20,7 @@ export default function Profile() {
         <div>
           <UserSection />
           <div className="divider" />
-          <BoardSelectionSection boards={user.boards} />
+          <BoardSelectionSection boards={boards} />
         </div>
       </Layout>
     </>

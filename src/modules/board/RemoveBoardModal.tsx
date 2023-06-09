@@ -11,9 +11,9 @@ export const RemoveBoardModal = ({ slug }: IProps) => {
   const showNotification = useToastConsumer();
   const router = useRouter();
   const utils = api.useContext();
-  const { mutateAsync, isLoading } = api.board.delete.useMutation({
+  const { mutateAsync, isLoading } = api.board.deleteBoard.useMutation({
     async onSettled() {
-      await utils.user.withBoards.invalidate();
+      await utils.board.getBoards.invalidate();
     },
   });
 
