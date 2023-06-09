@@ -15,6 +15,7 @@ export const getTask = protectedProcedure
         board: {
           slug: input.slug,
         },
+        deleted: false,
         number: Number(input.taskNumber),
       },
     });

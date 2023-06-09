@@ -38,10 +38,14 @@ export const getEnhancedBoard = protectedProcedure
         excludeField(member, ["password"]),
       ),
       tasks: [
-        ...board.tasks.map((task) => ({
-          ...task,
-          member: task.member ? excludeField(task.member, ["password"]) : null,
-        })),
+        ...board.tasks
+          .filter((task) => !task.deleted)
+          .map((task) => ({
+            ...task,
+            member: task.member
+              ? excludeField(task.member, ["password"])
+              : null,
+          })),
       ],
     };
   });

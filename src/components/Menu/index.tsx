@@ -27,7 +27,7 @@ export const Menu = ({ children }: IProps) => {
       </label>
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-box max-h-48 w-52 flex-nowrap overflow-y-auto bg-base-100 p-2 shadow"
+        className="dropdown-content menu rounded-box z-10 max-h-48 w-52 flex-nowrap overflow-y-auto bg-base-100 p-2 shadow"
       >
         {arrayChildren.map((child, i) => {
           return <li key={i}>{child}</li>;

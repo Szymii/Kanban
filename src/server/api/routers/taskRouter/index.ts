@@ -2,6 +2,7 @@ import { createTRPCRouter } from "src/server/api/trpc";
 
 import { addTask } from "./addTask";
 import { assign } from "./assign";
+import { deleteTask } from "./deleteTask";
 import { getAvailableStatuses } from "./getAvailableStatuses";
 import { getTask } from "./getTask";
 import { setDescription } from "./setDescription";
@@ -16,4 +17,5 @@ export const taskRouter = createTRPCRouter({
   setStatus,
   setTitle,
   setDescription,
+  deleteTask,
 });

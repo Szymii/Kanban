@@ -1,6 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// npx prisma generate
 // npx prisma migrate dev
 // npx prisma db push --force-reset
 // npx prisma db seed
@@ -55,6 +56,8 @@ model Task {
     title       String
     description String?
     number      Int
+
+    deleted Boolean @default(false)
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
