@@ -16,5 +16,6 @@ export const Default: Story = {
     action: () => {
       return;
     },
+    actionLabel: "Go Back",
   },
 };

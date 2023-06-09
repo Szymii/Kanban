@@ -6,7 +6,11 @@ export default function Custom404() {
 
   return (
     <>
-      <Error text="Page not Found" action={() => router.replace("/")} />
+      <Error
+        text="Page not Found"
+        action={() => router.replace("/")}
+        actionLabel="Go Back"
+      />
     </>
   );
 }

@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import { Breadcrumbs } from "src/components/Breadcrumbs/Breadcrumbs";
+import { Error } from "src/components/Error";
+import { Loading } from "src/components/Loading";
 import { Layout } from "src/containers/Layout";
 import {
   TaskActions,
@@ -17,23 +19,35 @@ interface IProps {
 }
 
 const ConnectedTask = ({ slug, taskNumber }: IProps) => {
-  const { data: board } = api.board.getEnhancedBoard.useQuery({ slug });
-  const { data: task } = api.task.getTask.useQuery({
+  const { data: board, isLoading: isBoardLoading } =
+    api.board.getEnhancedBoard.useQuery({ slug });
+  const { data: task, isLoading: isTaskLoading } = api.task.getTask.useQuery({
     slug,
     taskNumber,
   });
-  const { data: availableStatuses } = api.task.getAvailableStatuses.useQuery({
-    slug,
-    taskNumber,
-  });
+  const { data: availableStatuses, isLoading: areStatusesLoading } =
+    api.task.getAvailableStatuses.useQuery({
+      slug,
+      taskNumber,
+    });
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
   const taskType = task?.type!;
 
   const links = useTaskLinks({ type: taskType, slug, number: taskNumber });
 
+  if (isBoardLoading || areStatusesLoading || isTaskLoading) {
+    return <Loading />;
+  }
+
   if (!task || !board || !availableStatuses) {
-    return null;
+    return (
+      <Error
+        text="Something goes wrong"
+        action={() => location.reload()}
+        actionLabel="Retry"
+      />
+    );
   }
 
   return (

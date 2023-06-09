@@ -14,9 +14,7 @@ export const Notification = (props: IProps) => {
   return (
     <div className="toast-start toast">
       <div className={`alert ${type[props.type]}`}>
-        <div>
-          <span>{props.message}</span>
-        </div>
+        <span>{props.message}</span>
       </div>
     </div>
   );

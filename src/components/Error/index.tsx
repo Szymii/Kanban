@@ -4,9 +4,10 @@ interface IProps {
   text: string;
   size?: number;
   action?: () => void;
+  actionLabel?: string;
 }
 
-export const Error = ({ size = 512, text, action }: IProps) => {
+export const Error = ({ size = 512, text, action, actionLabel }: IProps) => {
   return (
     <div className="flex flex-col items-center">
       <Image
@@ -19,7 +20,7 @@ export const Error = ({ size = 512, text, action }: IProps) => {
       <h2 className="text-2xl">{text}</h2>
       {action && (
         <button className="btn-primary btn mt-4" onClick={action}>
-          Go back
+          {actionLabel || "Retry"}
         </button>
       )}
     </div>

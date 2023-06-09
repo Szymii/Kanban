@@ -1,3 +1,5 @@
+import { Error } from "src/components/Error";
+import { Loading } from "src/components/Loading";
 import { Layout } from "src/containers/Layout";
 import { BoardSection, HeaderSection } from "src/modules/board";
 import { useUserConsumer } from "src/modules/profile";
@@ -10,12 +12,22 @@ interface IProps {
 
 const ConnectedBoard = ({ slug }: IProps) => {
   const { id: userId } = useUserConsumer();
-  const { data: board } = api.board.getEnhancedBoard.useQuery({
+  const { data: board, isLoading } = api.board.getEnhancedBoard.useQuery({
     slug: slug,
   });
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (!board) {
-    return null;
+    return (
+      <Error
+        text="Something goes wrong"
+        action={() => location.reload()}
+        actionLabel="Retry"
+      />
+    );
   }
 
   const { statuses, members, tasks } = board;

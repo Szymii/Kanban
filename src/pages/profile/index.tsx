@@ -1,3 +1,5 @@
+import { Error } from "src/components/Error";
+import { Loading } from "src/components/Loading";
 import { Layout } from "src/containers/Layout";
 import {
   BoardSelectionSection,
@@ -7,10 +9,20 @@ import {
 import { api } from "src/utils/api";
 
 export default function Profile() {
-  const { data: boards } = api.board.getBoards.useQuery();
+  const { data: boards, isLoading } = api.board.getBoards.useQuery();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   if (!boards) {
-    return null;
+    return (
+      <Error
+        text="Something goes wrong"
+        action={() => location.reload()}
+        actionLabel="Retry"
+      />
+    );
   }
 
   return (

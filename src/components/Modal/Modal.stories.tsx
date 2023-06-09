@@ -12,7 +12,7 @@ const ID = "my-modal";
 export const Default: StoryObj<typeof Modal> = {
   render: () => (
     <>
-      <label htmlFor={ID} className="btn">
+      <label htmlFor={ID} className="btn-neutral btn">
         open modal
       </label>
       <Modal
