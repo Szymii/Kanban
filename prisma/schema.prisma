@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 // npx prisma generate
-// npx prisma migrate dev - if needed
+// npx prisma migrate dev # if needed
 // npx prisma db push --force-reset
 // npx prisma db seed
 
@@ -56,7 +56,8 @@ model Task {
     title       String
     description String?
     number      Int
-    Relation    Relation[]
+    relation    Relation[] @relation("relation")
+    rely        Relation[] @relation("rely")
 
     deleted Boolean @default(false)
 
@@ -67,8 +68,9 @@ model Task {
 model Relation {
     id            String       @id @default(cuid())
     type          RelationType
-    task          Task         @relation(fields: [taskId], references: [id])
+    task          Task         @relation("relation", fields: [taskId], references: [id])
     taskId        String
+    relatedTask   Task         @relation("rely", fields: [relatedTaskId], references: [id])
     relatedTaskId String
 }
 
