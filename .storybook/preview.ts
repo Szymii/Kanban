@@ -1,6 +1,9 @@
 import type { Preview } from "@storybook/react";
+import { initialize, mswDecorator } from "msw-storybook-addon";
 
 import "../src/styles/globals.css";
+
+initialize();
 
 const preview: Preview = {
   parameters: {
@@ -13,6 +16,7 @@ const preview: Preview = {
     },
     layout: "fullscreen",
   },
+  decorators: [mswDecorator],
 };
 
 export default preview;

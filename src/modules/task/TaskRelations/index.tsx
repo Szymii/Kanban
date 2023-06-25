@@ -15,6 +15,8 @@ export const TaskRelations = ({ taskId, members }: IProps) => {
     taskId,
   });
 
+  console.log(relations);
+
   if (isLoading) {
     return (
       <div className="mt-8 py-4">

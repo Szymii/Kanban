@@ -1,0 +1,1 @@
+export { getRelationHandler } from "./getRelationHandler";
