@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PublicLayout } from "src/containers/PublicLayout";
-import { PublicMeta } from "src/modules/publicModules";
 
 export default function Home() {
   return (
     <>
-      <PublicMeta />
       <PublicLayout>
         <div className="flex flex-col items-center justify-center gap-16 lg:-mt-8">
           <div className="container mx-auto flex flex-col items-center justify-center gap-16 px-8 lg:flex-row">

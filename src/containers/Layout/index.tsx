@@ -1,5 +1,6 @@
 import { signOut } from "next-auth/react";
 import { type ReactNode } from "react";
+import { Meta } from "src/modules/Meta";
 import { UserProvider } from "src/modules/profile";
 import { api } from "src/utils/api";
 
@@ -14,6 +15,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <UserProvider userData={user}>
+      <Meta />
       <div>
         <TopPanel
           name={user.firstName}

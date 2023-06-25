@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import { LinkButton } from "src/components/LinkButton";
 import { PublicLayout } from "src/containers/PublicLayout";
-import { PublicMeta, RegisterForm } from "src/modules/publicModules";
+import { RegisterForm } from "src/modules/publicModules";
 import { authOptions } from "src/server/auth";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -28,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Login() {
   return (
     <>
-      <PublicMeta />
       <PublicLayout>
         <div className="flex items-center justify-center">
           <div className="container mx-auto flex flex-col items-center justify-center gap-16 px-8 lg:flex-row">
