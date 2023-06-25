@@ -1,7 +1,7 @@
-import type { Type } from "@prisma/client";
+import type { TaskType } from "@prisma/client";
 
 interface IProps {
-  type: Type;
+  type: TaskType;
   slug: string;
   number: string;
 }

@@ -1,4 +1,4 @@
-import type { Status, Type } from "@prisma/client";
+import type { Status, TaskType } from "@prisma/client";
 import { FormProvider, useForm } from "react-hook-form";
 import { Modal, ModalButton } from "src/components/Modal";
 import { useToastConsumer } from "src/containers/Toasts";
@@ -14,7 +14,7 @@ interface IProps {
 interface ICreateTaskData {
   title: string;
   description: string;
-  type: Type;
+  type: TaskType;
   statusId: string;
 }
 

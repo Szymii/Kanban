@@ -1,4 +1,4 @@
-import { Type } from "@prisma/client";
+import { TaskType } from "@prisma/client";
 import { protectedProcedure } from "src/server/api/trpc";
 import { getNextNumber } from "src/server/modules/task";
 import { z } from "zod";
@@ -8,7 +8,7 @@ export const addTask = protectedProcedure
     z.object({
       title: z.string(),
       description: z.string(),
-      type: z.nativeEnum(Type),
+      type: z.nativeEnum(TaskType),
       statusId: z.string(),
       slug: z.string(),
     }),

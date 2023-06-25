@@ -1,8 +1,8 @@
-import type { Type } from "@prisma/client";
+import type { TaskType } from "@prisma/client";
 
 interface IProps {
   number: number;
-  type: Type;
+  type: TaskType;
   boardSlug: string;
 }
 

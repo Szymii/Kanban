@@ -1,5 +1,5 @@
 // npx prisma db seed
-import { PrismaClient, Type } from "@prisma/client";
+import { PrismaClient, TaskType } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
@@ -105,7 +105,7 @@ async function main() {
           email: "admin@example.com",
         },
       },
-      type: Type.TASK,
+      type: TaskType.TASK,
       title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -130,7 +130,7 @@ async function main() {
           email: "admin@example.com",
         },
       },
-      type: Type.STORY,
+      type: TaskType.STORY,
       title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     },
   });
@@ -143,7 +143,7 @@ async function main() {
           slug: "ADM",
         },
       },
-      type: Type.BUG,
+      type: TaskType.BUG,
       title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

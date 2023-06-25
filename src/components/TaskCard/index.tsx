@@ -1,4 +1,4 @@
-import type { Type } from "@prisma/client";
+import type { TaskType } from "@prisma/client";
 import Link from "next/link";
 import { type IUser } from "src/modules/profile";
 
@@ -8,7 +8,7 @@ import { TaskMeta } from "./TaskMeta";
 interface IProps {
   text: string;
   number: number;
-  type: Type;
+  type: TaskType;
   boardSlug: string;
   path: string;
   variant?: "block" | "inline";
