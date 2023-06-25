@@ -1,5 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import bcrypt from "bcrypt";
+import { env } from "src/env.mjs";
 import { publicProcedure } from "src/server/api/trpc";
 import { z } from "zod";
 
@@ -29,11 +30,12 @@ export const signUp = publicProcedure
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Registration closed for security purposes
-    throw new TRPCError({
-      message: "Registration closed.",
-      code: "FORBIDDEN",
-    });
+    if (env.REGISTRATION_CLOSED === "true") {
+      throw new TRPCError({
+        message: "Registration closed.",
+        code: "FORBIDDEN",
+      });
+    }
 
     const result = await ctx.prisma.user.create({
       data: { firstName, lastName, email, password: hashedPassword },
