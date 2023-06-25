@@ -9,7 +9,7 @@ interface IProps {
 
 export const Error = ({ size = 512, text, action, actionLabel }: IProps) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pb-4">
       <Image
         priority
         src="/images/Bug.svg"

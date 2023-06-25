@@ -1,3 +1,6 @@
+import { Error } from "src/components/Error";
+import { api } from "src/utils/api";
+
 import { RelationForm } from "./RelationForm";
 import { RelationList } from "./RelationList";
 
@@ -6,11 +9,36 @@ interface IProps {
 }
 
 export const TaskRelations = ({ taskId }: IProps) => {
+  const { data: relations, isLoading } = api.task.getRelations.useQuery({
+    taskId,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="mt-8 py-4">
+        <h2 className="mb-4 font-semibold">Relations</h2>
+        <div className="flex justify-center">
+          <span className="loading loading-spinner loading-lg text-primary" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!relations) {
+    return (
+      <Error
+        text="Something goes wrong"
+        action={() => location.reload()}
+        actionLabel="Retry"
+      />
+    );
+  }
+
   return (
     <div className="mt-8 py-4">
       <h2 className="mb-4 font-semibold">Relations</h2>
       <RelationForm taskId={taskId} />
-      <RelationList relations={[]} />
+      <RelationList relations={relations} />
     </div>
   );
 };

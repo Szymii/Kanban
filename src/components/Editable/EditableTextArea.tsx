@@ -51,7 +51,7 @@ export const EditableTextArea = ({
         {showActionButtons && (
           <>
             <button
-              className="btn-neutral btn"
+              className="btn-primary btn"
               onClick={() => {
                 action(value ?? "");
               }}

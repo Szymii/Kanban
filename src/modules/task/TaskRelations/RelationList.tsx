@@ -1,27 +1,54 @@
+import { type inferRouterOutputs } from "@trpc/server";
 import Link from "next/link";
-import { Avatar, EmptyAvatar } from "src/components/Avatar";
+import { useRouter } from "next/router";
+import { EmptyAvatar } from "src/components/Avatar";
 import { TaskMeta } from "src/components/TaskCard/TaskMeta";
+import { type AppRouter } from "src/server/api/root";
+
+import { getOptionFromRelationType } from "./getOptionFromRelationType";
+
+type RouterOutput = inferRouterOutputs<AppRouter>;
 
 interface IProps {
-  relations: [];
+  relations: RouterOutput["task"]["getRelations"];
 }
 
 export const RelationList = ({ relations }: IProps) => {
+  const { query } = useRouter();
+  const [getUrl] = useGetUrl();
+
   return (
     <div className="mt-4">
       {relations.map((relation) => {
+        if (!("relatedTask" in relation)) {
+          return null;
+        }
+
+        const taskRelationLabel = getOptionFromRelationType().find(
+          (option) => option.value === relation.type,
+        );
+
         return (
-          <div className="flex gap-4" key={""}>
+          <div className="mt-1 flex gap-4" key={""}>
             <div className="flex w-full rounded-md border">
               <div className="w-full min-w-[131px] max-w-[180px] basis-1/2 py-3 pl-4 text-sm font-semibold">
-                {"Blocked By"}
+                {taskRelationLabel?.label}
               </div>
               <div className="divider divider-horizontal m-0" />
               <div className="flex w-full basis-full items-center justify-between px-4">
-                <Link href={"/board/TST/1"} className="flex items-center gap-4">
-                  <TaskMeta number={111} type={"BUG"} boardSlug={"ASD"} />
+                <Link
+                  href={getUrl(relation.relatedTask.number)}
+                  className="flex items-center gap-4"
+                >
+                  <TaskMeta
+                    number={relation.relatedTask.number}
+                    type={relation.relatedTask.type}
+                    boardSlug={
+                      typeof query.board === "string" ? query.board : ""
+                    }
+                  />
                   <span className="hidden truncate hover:underline md:block md:max-w-[260px] lg:max-w-md">
-                    {"text text texttexttexttext text texttext text"}
+                    {relation.relatedTask.title}
                   </span>
                 </Link>
                 {/* {assignedUser ? (
@@ -65,4 +92,15 @@ export const RelationList = ({ relations }: IProps) => {
       })}
     </div>
   );
+};
+
+const useGetUrl = () => {
+  const { query } = useRouter();
+
+  return [
+    (taskNumber: number) =>
+      `/board/${
+        typeof query.board === "string" ? query.board : ""
+      }/${taskNumber}`,
+  ] as const;
 };
