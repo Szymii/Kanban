@@ -1,19 +1,21 @@
+import type { User } from "@prisma/client";
 import { type inferRouterOutputs } from "@trpc/server";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { EmptyAvatar } from "src/components/Avatar";
 import { TaskMeta } from "src/components/TaskCard/TaskMeta";
 import { type AppRouter } from "src/server/api/root";
 
+import { AssignedUserAvatar } from "./AssignedUserAvatar";
 import { getOptionFromRelationType } from "./getOptionFromRelationType";
 
 type RouterOutput = inferRouterOutputs<AppRouter>;
 
 interface IProps {
   relations: RouterOutput["task"]["getRelations"];
+  members: Omit<User, "password">[];
 }
 
-export const RelationList = ({ relations }: IProps) => {
+export const RelationList = ({ relations, members }: IProps) => {
   const { query } = useRouter();
   const [getUrl] = useGetUrl();
 
@@ -29,7 +31,7 @@ export const RelationList = ({ relations }: IProps) => {
         );
 
         return (
-          <div className="mt-1 flex gap-4" key={""}>
+          <div className="mt-1 flex gap-4" key={relation.id}>
             <div className="flex w-full rounded-md border">
               <div className="w-full min-w-[131px] max-w-[180px] basis-1/2 py-3 pl-4 text-sm font-semibold">
                 {taskRelationLabel?.label}
@@ -51,23 +53,10 @@ export const RelationList = ({ relations }: IProps) => {
                     {relation.relatedTask.title}
                   </span>
                 </Link>
-                {/* {assignedUser ? (
-                  <div
-                    className="tooltip"
-                    data-tip={`${assignedUser.firstName} ${assignedUser.lastName}`}
-                  >
-                    <Avatar
-                      name={assignedUser.firstName}
-                      surname={assignedUser.lastName}
-                      avatarUrl={assignedUser.image}
-                      size="xs"
-                    />
-                  </div>
-                ) : ( */}
-                <div className="tooltip" data-tip="Not assigned">
-                  <EmptyAvatar size="xs" />
-                </div>
-                {/* )} */}
+                <AssignedUserAvatar
+                  userId={relation.relatedTask.userId}
+                  members={members}
+                />
               </div>
             </div>
             <div className="tooltip" data-tip="Disconnect">

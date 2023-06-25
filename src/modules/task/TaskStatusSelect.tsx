@@ -35,7 +35,7 @@ export const TaskStatusSelect = ({
         options={options}
         isDisabled={disabled}
         onChange={onChange}
-        defaultValue={selectedStatusId ? options[defaultOption] : options[0]}
+        value={selectedStatusId ? options[defaultOption] : options[0]}
       />
     </div>
   );

@@ -63,7 +63,7 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
           taskId={task.id}
         />
         <TaskContent taskDescription={task.description} taskId={task.id} />
-        <TaskRelations taskId={task.id} />
+        <TaskRelations taskId={task.id} members={board.members} />
         <div className="mt-auto">
           <TaskTimestamps
             createdAt={task.createdAt.toLocaleDateString()}

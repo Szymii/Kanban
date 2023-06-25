@@ -48,7 +48,7 @@ export const UserSelect = ({
   return (
     <Select
       options={options}
-      defaultValue={selectedUserId ? options[defaultOption] : options[0]}
+      value={selectedUserId ? options[defaultOption] : options[0]}
       formatOptionLabel={CustomOptionLabel}
       onChange={action}
       isDisabled={disabled}

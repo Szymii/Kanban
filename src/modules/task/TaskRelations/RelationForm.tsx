@@ -22,8 +22,12 @@ export const RelationForm = ({ taskId }: IProps) => {
     reset,
   } = useForm<IRelationData>();
   const options = getOptionFromRelationType();
-  // const utils = api.useContext();
-  const { mutateAsync, isLoading } = api.task.addRelation.useMutation({});
+  const utils = api.useContext();
+  const { mutateAsync, isLoading } = api.task.addRelation.useMutation({
+    async onSettled() {
+      await utils.task.getRelations.invalidate();
+    },
+  });
   const showNotification = useToastConsumer();
 
   const onSubmit = async (data: IRelationData) => {

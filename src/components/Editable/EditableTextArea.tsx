@@ -18,6 +18,10 @@ export const EditableTextArea = ({
   const showActionButtons = value !== defaultText;
 
   useEffect(() => {
+    setValue(defaultText);
+  }, [defaultText]);
+
+  useEffect(() => {
     if (!areaRef.current) {
       return;
     }
