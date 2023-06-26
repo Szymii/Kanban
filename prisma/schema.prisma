@@ -37,10 +37,12 @@ model Board {
 }
 
 model Status {
-    id      String @id @default(cuid())
+    id      String  @id @default(cuid())
     name    String
-    board   Board  @relation(fields: [boardId], references: [id])
+    board   Board   @relation(fields: [boardId], references: [id])
     boardId String
+    initial Boolean @default(false)
+    final   Boolean @default(false)
     tasks   Task[]
 }
 

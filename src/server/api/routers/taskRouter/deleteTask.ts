@@ -12,6 +12,9 @@ export const deleteTask = protectedProcedure
       where: {
         id: input.taskId,
       },
+      include: {
+        relation: true,
+      },
     });
 
     return {

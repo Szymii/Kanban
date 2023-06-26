@@ -12,7 +12,7 @@ export const EditableInput = ({ defaultText, onSave }: IProps) => {
       tabIndex={1}
       onSave={onSave}
       startEditingOnFocus
-      className="min-h-16 flex w-full justify-center pr-4 "
+      className="min-h-16 flex w-[calc(100%-65px)] justify-center pr-4 "
       viewContainerClassName="text-xl md:text-3xl font-semibold flex gap-4"
       editButtonClassName="hidden"
       saveButtonClassName="btn md:w-24 btn-primary"

@@ -1,12 +1,16 @@
-import type { TaskType } from "@prisma/client";
+import { TaskType } from "@prisma/client";
 
 interface IProps {
-  type: TaskType;
+  type: TaskType | undefined;
   slug: string;
   number: string;
 }
 
-export const useTaskLinks = ({ type, slug, number }: IProps) => {
+export const useTaskLinks = ({
+  type = TaskType.TASK,
+  slug,
+  number,
+}: IProps) => {
   const taskIcon = {
     STORY: (
       <svg

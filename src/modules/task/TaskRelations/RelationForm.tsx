@@ -1,6 +1,7 @@
-import { type RelationType } from "@prisma/client";
+import { type RelationType, type Status } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { useToastConsumer } from "src/containers/Toasts";
+import { useParams } from "src/utils";
 import { api } from "src/utils/api";
 
 import { getOptionFromRelationType } from "./getOptionFromRelationType";
@@ -12,28 +13,31 @@ interface IRelationData {
 
 interface IProps {
   taskId: string;
+  taskStatus: Status | null;
 }
 
-export const RelationForm = ({ taskId }: IProps) => {
+export const RelationForm = ({ taskId, taskStatus }: IProps) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
   } = useForm<IRelationData>();
-  const options = getOptionFromRelationType();
+  const { board } = useParams<{ board: string }>();
+  const options = getOptionFromRelationType(taskStatus?.final);
+  const showNotification = useToastConsumer();
   const utils = api.useContext();
   const { mutateAsync, isLoading } = api.task.addRelation.useMutation({
     async onSettled() {
       await utils.task.getRelations.invalidate();
     },
   });
-  const showNotification = useToastConsumer();
 
   const onSubmit = async (data: IRelationData) => {
     try {
       await mutateAsync({
         relatedTaskNumber: Number(data.taskNumber),
+        slug: board,
         relation: data.relationId,
         taskId,
       });

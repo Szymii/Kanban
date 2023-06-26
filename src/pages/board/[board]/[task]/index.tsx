@@ -31,10 +31,7 @@ const ConnectedTask = ({ slug, taskNumber }: IProps) => {
       taskNumber,
     });
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
-  const taskType = task?.type!;
-
-  const links = useTaskLinks({ type: taskType, slug, number: taskNumber });
+  const links = useTaskLinks({ type: task?.type, slug, number: taskNumber });
 
   if (isBoardLoading || areStatusesLoading || isTaskLoading) {
     return <Loading />;

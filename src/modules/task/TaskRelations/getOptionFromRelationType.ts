@@ -1,6 +1,15 @@
 import { RelationType } from "@prisma/client";
 
-export const getOptionFromRelationType = () => {
+export const getOptionFromRelationType = (final?: boolean) => {
+  if (final) {
+    return [
+      {
+        value: RelationType.RELATED_TO,
+        label: "Related to",
+      },
+    ] as const;
+  }
+
   return [
     {
       value: RelationType.RELATED_TO,

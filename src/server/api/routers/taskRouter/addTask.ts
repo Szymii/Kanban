@@ -18,34 +18,36 @@ export const addTask = protectedProcedure
       slug: input.slug,
     });
 
-    const task = await ctx.prisma.task.create({
-      data: {
-        number,
-        title: input.title,
-        type: input.type,
-        description: input.description,
-        board: {
-          connect: {
-            slug: input.slug,
-          },
-        },
-      },
-    });
-
-    if (input.statusId !== "") {
-      await ctx.prisma.task.update({
-        where: {
-          id: task.id,
-        },
+    await ctx.prisma.$transaction(async (tx) => {
+      const task = await tx.task.create({
         data: {
-          status: {
+          number,
+          title: input.title,
+          type: input.type,
+          description: input.description,
+          board: {
             connect: {
-              id: input.statusId,
+              slug: input.slug,
             },
           },
         },
       });
-    }
+
+      if (input.statusId !== "") {
+        await tx.task.update({
+          where: {
+            id: task.id,
+          },
+          data: {
+            status: {
+              connect: {
+                id: input.statusId,
+              },
+            },
+          },
+        });
+      }
+    });
 
     return {
       status: 201,

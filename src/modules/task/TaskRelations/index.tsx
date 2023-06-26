@@ -11,13 +11,19 @@ interface IProps {
 }
 
 export const TaskRelations = ({ taskId, members }: IProps) => {
-  const { data: relations, isLoading } = api.task.getRelations.useQuery({
-    taskId,
-  });
+  const [
+    { data: relations, isLoading },
+    { data: status, isLoading: isStatusLoading },
+  ] = api.useQueries((t) => [
+    t.task.getRelations({
+      taskId,
+    }),
+    t.task.getTaskStatus({
+      taskId,
+    }),
+  ]);
 
-  console.log(relations);
-
-  if (isLoading) {
+  if (isLoading || isStatusLoading) {
     return (
       <div className="mt-8 py-4">
         <h2 className="mb-4 font-semibold">Relations</h2>
@@ -28,7 +34,7 @@ export const TaskRelations = ({ taskId, members }: IProps) => {
     );
   }
 
-  if (!relations) {
+  if (!relations || status === undefined) {
     return (
       <Error
         text="Something goes wrong"
@@ -41,7 +47,7 @@ export const TaskRelations = ({ taskId, members }: IProps) => {
   return (
     <div className="mt-8 py-4">
       <h2 className="mb-4 font-semibold">Relations</h2>
-      <RelationForm taskId={taskId} />
+      <RelationForm taskId={taskId} taskStatus={status} />
       <RelationList relations={relations} members={members} />
     </div>
   );

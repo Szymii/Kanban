@@ -32,6 +32,7 @@ export const TaskActions = ({
       async onSettled() {
         await utils.board.getEnhancedBoard.invalidate();
         await utils.task.getAvailableStatuses.invalidate();
+        await utils.task.getTaskStatus.invalidate();
       },
     });
 

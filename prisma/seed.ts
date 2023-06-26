@@ -24,12 +24,14 @@ async function main() {
                 data: [
                   {
                     name: "To Do",
+                    initial: true,
                   },
                   {
                     name: "In Progress",
                   },
                   {
                     name: "Done",
+                    final: true,
                   },
                 ],
               },
@@ -59,6 +61,7 @@ async function main() {
                 {
                   id: "1231",
                   name: "To Do",
+                  initial: true,
                 },
                 {
                   id: "1232",
@@ -75,6 +78,7 @@ async function main() {
                 {
                   id: "1235",
                   name: "Done",
+                  final: true,
                 },
               ],
             },

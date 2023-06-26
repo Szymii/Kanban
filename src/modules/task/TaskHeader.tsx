@@ -23,7 +23,7 @@ export const TaskHeader = ({ taskTitle, taskId }: IProps) => {
   return (
     <>
       <RemoveTaskModal taskId={taskId} />
-      <div className="flex items-center justify-between">
+      <div className="flex w-full items-center justify-between">
         <EditableInput
           defaultText={taskTitle}
           onSave={async (newTitle) => {

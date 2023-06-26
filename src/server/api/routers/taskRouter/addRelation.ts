@@ -7,6 +7,7 @@ export const addRelation = protectedProcedure
   .input(
     z.object({
       taskId: z.string(),
+      slug: z.string(),
       relation: z.nativeEnum(RelationType),
       relatedTaskNumber: z.number(),
     }),
@@ -15,6 +16,10 @@ export const addRelation = protectedProcedure
     const relatedTask = await ctx.prisma.task.findFirst({
       where: {
         number: input.relatedTaskNumber,
+        board: {
+          slug: input.slug,
+        },
+        deleted: false,
       },
     });
 
