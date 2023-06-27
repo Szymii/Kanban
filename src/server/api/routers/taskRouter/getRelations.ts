@@ -1,5 +1,5 @@
 import { protectedProcedure } from "src/server/api/trpc";
-import { invertRelationsType } from "src/server/modules/task";
+import { invertRelationsType } from "src/server/modules/relation";
 import { z } from "zod";
 
 export const getRelations = protectedProcedure

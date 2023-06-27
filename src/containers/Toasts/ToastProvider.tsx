@@ -25,7 +25,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     if (toasts.length > 0) {
       const timer = setTimeout(
         () => setToasts((toasts) => toasts.slice(1)),
-        5000,
+        3000,
       );
 
       return () => clearTimeout(timer);

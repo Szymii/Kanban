@@ -1,6 +1,7 @@
 import { RelationType } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { protectedProcedure } from "src/server/api/trpc";
+import { relationGuard } from "src/server/modules/relation";
 import { z } from "zod";
 
 export const addRelation = protectedProcedure
@@ -27,6 +28,22 @@ export const addRelation = protectedProcedure
       throw new TRPCError({
         message: "Invalid task number.",
         code: "NOT_FOUND",
+      });
+    }
+
+    const relations = await ctx.prisma.relation.findMany({
+      where: {
+        relatedTaskId: relatedTask.id,
+        taskId: input.taskId,
+      },
+    });
+
+    const { isValid, message } = relationGuard(relations, input.relation);
+
+    if (!isValid) {
+      throw new TRPCError({
+        message,
+        code: "BAD_REQUEST",
       });
     }
 
