@@ -1,7 +1,7 @@
 import { RelationType } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { protectedProcedure } from "src/server/api/trpc";
-import { relationGuard } from "src/server/modules/relation";
+import { relationGuardRelation } from "src/server/modules/relation";
 import { z } from "zod";
 
 export const addRelation = protectedProcedure
@@ -14,6 +14,19 @@ export const addRelation = protectedProcedure
     }),
   )
   .mutation(async ({ input, ctx }) => {
+    const task = await ctx.prisma.task.findFirst({
+      where: {
+        id: input.taskId,
+        board: {
+          slug: input.slug,
+        },
+        deleted: false,
+      },
+      include: {
+        status: true,
+      },
+    });
+
     const relatedTask = await ctx.prisma.task.findFirst({
       where: {
         number: input.relatedTaskNumber,
@@ -22,9 +35,12 @@ export const addRelation = protectedProcedure
         },
         deleted: false,
       },
+      include: {
+        status: true,
+      },
     });
 
-    if (!relatedTask || relatedTask.id === input.taskId) {
+    if (!relatedTask || !task || relatedTask.id === input.taskId) {
       throw new TRPCError({
         message: "Invalid task number.",
         code: "NOT_FOUND",
@@ -38,11 +54,14 @@ export const addRelation = protectedProcedure
       },
     });
 
-    const { isValid, message } = relationGuard(relations, input.relation);
+    const { isRelationValid, relationMessage } = relationGuardRelation(
+      relations,
+      input.relation,
+    );
 
-    if (!isValid) {
+    if (!isRelationValid) {
       throw new TRPCError({
-        message,
+        message: relationMessage,
         code: "BAD_REQUEST",
       });
     }

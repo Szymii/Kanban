@@ -1,2 +1,2 @@
 export { invertRelationsType } from "./invertRelationsType";
-export { relationGuard } from "./relationGuard";
+export { relationGuardRelation } from "./relationGuardRelation";

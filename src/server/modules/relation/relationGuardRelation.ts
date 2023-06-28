@@ -1,16 +1,16 @@
 import { type Relation, RelationType } from "@prisma/client";
 
 interface IReturn {
-  isValid: boolean;
-  message: string | undefined;
+  isRelationValid: boolean;
+  relationMessage: string | undefined;
 }
 
-export const relationGuard = (
+export const relationGuardRelation = (
   relations: Relation[],
   relationType: RelationType,
 ): IReturn => {
   if (relations.length === 0) {
-    return { isValid: true, message: undefined };
+    return { isRelationValid: true, relationMessage: undefined };
   }
 
   const isValid = relations.every((relation) => {
@@ -20,8 +20,8 @@ export const relationGuard = (
   });
 
   return {
-    isValid,
-    message: "Relation unavailable",
+    isRelationValid: isValid,
+    relationMessage: "Relation unavailable",
   };
 };
 
