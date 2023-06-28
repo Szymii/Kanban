@@ -25,6 +25,7 @@ export const TaskActions = ({
     api.task.assign.useMutation({
       async onSettled() {
         await utils.board.getEnhancedBoard.invalidate();
+        await utils.task.getTask.invalidate();
       },
     });
   const { mutateAsync: mutateState, isLoading: isLoadingStatus } =
@@ -33,6 +34,7 @@ export const TaskActions = ({
         await utils.board.getEnhancedBoard.invalidate();
         await utils.task.getAvailableStatuses.invalidate();
         await utils.task.getTaskStatus.invalidate();
+        await utils.task.getTask.invalidate();
       },
     });
 

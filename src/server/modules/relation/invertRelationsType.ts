@@ -5,13 +5,13 @@ const invert = (relation: RelationType) => {
     case RelationType.RELATED_TO:
       return RelationType.RELATED_TO;
     case RelationType.BLOCKED_BY:
-      return RelationType.BLOCKING;
-    case RelationType.BLOCKING:
+      return RelationType.BLOCKS;
+    case RelationType.BLOCKS:
       return RelationType.BLOCKED_BY;
-    case RelationType.DEPENDING:
+    case RelationType.DEPENDENT_ON:
       return RelationType.DEPENDS_ON;
     case RelationType.DEPENDS_ON:
-      return RelationType.DEPENDING;
+      return RelationType.DEPENDENT_ON;
   }
 };
 

@@ -20,16 +20,16 @@ export const getOptionFromRelationType = (final?: boolean) => {
       label: "Blocked by",
     },
     {
-      value: RelationType.BLOCKING,
-      label: "Blocking",
+      value: RelationType.BLOCKS,
+      label: "Blocks",
     },
     {
       value: RelationType.DEPENDS_ON,
       label: "Depends on",
     },
     {
-      value: RelationType.DEPENDING,
-      label: "Depending",
+      value: RelationType.DEPENDENT_ON,
+      label: "Dependent to",
     },
   ] as const;
 };

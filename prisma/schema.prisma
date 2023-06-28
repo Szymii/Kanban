@@ -79,9 +79,9 @@ model Relation {
 enum RelationType {
     RELATED_TO
     BLOCKED_BY
-    BLOCKING
+    BLOCKS
     DEPENDS_ON
-    DEPENDING
+    DEPENDENT_ON
 }
 
 enum TaskType {

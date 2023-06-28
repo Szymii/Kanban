@@ -28,12 +28,12 @@ export const relationGuardRelation = (
 const availableRelations = {
   [RelationType.RELATED_TO]: [
     RelationType.BLOCKED_BY,
-    RelationType.BLOCKING,
-    RelationType.DEPENDING,
+    RelationType.BLOCKS,
+    RelationType.DEPENDENT_ON,
     RelationType.DEPENDS_ON,
   ],
   [RelationType.BLOCKED_BY]: [RelationType.RELATED_TO],
-  [RelationType.BLOCKING]: [RelationType.RELATED_TO],
-  [RelationType.DEPENDING]: [RelationType.RELATED_TO],
+  [RelationType.BLOCKS]: [RelationType.RELATED_TO],
+  [RelationType.DEPENDENT_ON]: [RelationType.RELATED_TO],
   [RelationType.DEPENDS_ON]: [RelationType.RELATED_TO],
 };
