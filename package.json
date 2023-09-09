@@ -73,6 +73,9 @@
   "ct3aMetadata": {
     "initVersion": "7.9.0"
   },
+  "engines": {
+    "node": "20.5.0"
+  },
   "msw": {
     "workerDirectory": "public"
   }
