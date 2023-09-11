@@ -30,7 +30,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
 
       return () => clearTimeout(timer);
     }
-  });
+  }, [toasts.length]);
 
   const addToast = useCallback((toast: IToast) => {
     setToasts((toasts) => [
